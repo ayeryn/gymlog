@@ -1,6 +1,7 @@
 import calendar
 import os
 
+
 class Report:
 
     def __init__(self, month, year):
@@ -21,7 +22,7 @@ class Report:
         msg = 'month = {}\nyear = {}\n'.format(self.month, self.year)
         msg += 'cal = {}\nname = {}\n'.format(self.cal, self.name)
         print(msg)
-        
+
     def process_jnl(self):
         """Set self.attendance: a dict of date:class
         """
@@ -30,11 +31,10 @@ class Report:
                 temp = line.split(',')
                 self.attendance[temp[0]] = temp[1].title()
 
-
     def print_attendance(self):
         for k, v in self.attendance.items():
             print('{:>2}: {}'.format(k, v))
-    
+
     def __insert_class(self, s, day, is_class=False):
         """ Return a string
 
@@ -107,7 +107,8 @@ class Report:
             self.report_str += days_str
             self.report_str += '\n'
 
-        self.class_tally = dict(sorted(self.class_tally.items(), key=lambda x: x[1], reverse=True))
+        self.class_tally = dict(
+            sorted(self.class_tally.items(), key=lambda x: x[1], reverse=True))
 
     def print_report(self):
         """ Print the report!!
@@ -127,5 +128,5 @@ class Report:
         msg = '\n'
         msg += '==== Classes taken (sorted) ====\n'
         for k, v in self.class_tally.items():
-            msg += 'Class: {:>15}, taken {:>2} times\n'.format(k.rstrip(), v)
+            msg += 'Class: {:>15}, taken{:>2} times\n'.format(k.rstrip(), v)
         print(msg)

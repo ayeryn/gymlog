@@ -1,6 +1,4 @@
 from Report import Report
-# import Class
-# import re
 
 
 def main():
