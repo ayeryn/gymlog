@@ -17,7 +17,7 @@ def main():
 
     report = Report(month, year)
     report.process_jnl()
-    report.print_attendance()
-    
+    report.generate_report()
+    report.print_report()
 
 main()
