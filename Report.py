@@ -19,11 +19,6 @@ class Report:
         self.total_classes = 0
         self.num_of_weeks = 0
 
-    def print_attrs(self):
-        msg = 'month = {}\nyear = {}\n'.format(self.month, self.year)
-        msg += 'cal = {}\nname = {}\n'.format(self.cal, self.name)
-        print(msg)
-
     def process_jnl(self):
         """Set self.attendance: a dict of date:class
         """
