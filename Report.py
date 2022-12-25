@@ -7,7 +7,7 @@ class Report:
     def __init__(self, month, year):
         self.month = month
         self.year = year
-        self.cal = calendar.month(int(self.year), int(self.month))
+        self.cal = calendar.month(int(self.year), int(self.month)).rstrip()
         self.name = os.getcwd() + '/' + self.year + self.month + '.csv'
         self.title = 'Monthly Report {}/{}'.format(self.year, self.month)
 
@@ -17,6 +17,7 @@ class Report:
         self.class_tally = {}
         self.report_str = ''
         self.total_classes = 0
+        self.num_of_weeks = 0
 
     def print_attrs(self):
         msg = 'month = {}\nyear = {}\n'.format(self.month, self.year)
@@ -72,6 +73,7 @@ class Report:
         """
 
         weeks = self.cal.split('\n')
+        self.num_of_weeks = len(weeks) - 2
 
         # Get month and weekday lines in cal
         self.report_str = weeks[0] + '\n'
@@ -116,15 +118,21 @@ class Report:
         Final output includes:
         - Attendance in calendar view
         - Total classes taken
+        - Average class per week
         - Classes taken sorted by attendance
         """
 
-        # print calendar view
+        # Calendar view
         print(self.report_str)
 
-        # Print class details
+        # Total class
         print('Total classes taken: ' + str(self.total_classes))
 
+        # Avg. class per week
+        avg = self.total_classes // self.num_of_weeks
+        print('Average classes per week: ' + str(avg))
+
+        # Classes details sorted
         msg = '\n'
         msg += '==== Classes taken (sorted) ====\n'
         for k, v in self.class_tally.items():
