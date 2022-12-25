@@ -35,6 +35,7 @@ Mo Tu We Th Fr Sa Su
 
 
 Total classes taken: 10
+Average classes per week: 2
 
 ==== Classes taken (sorted) ====
 Class:        Hot Yoga, taken 2 times
