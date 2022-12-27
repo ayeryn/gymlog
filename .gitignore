@@ -130,3 +130,6 @@ dmypy.json
 test.py
 *.csv
 .vscode/settings.json
+gym_report.code-workspace
+Python OOP Notes.md
+.DS_Store
