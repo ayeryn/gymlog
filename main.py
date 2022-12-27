@@ -14,7 +14,6 @@ def main():
     month = '12'
 
     report = MonthlyReport(month, year)
-    report.generate_report()
     report.print_report()
 
 

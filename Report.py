@@ -65,7 +65,7 @@ class MonthlyReport:
 
         return ret
 
-    def generate_report(self):
+    def __generate_report(self):
         """ Set self.report_str: string of complete monthly
         attendance report in calendar view.
 
@@ -120,12 +120,15 @@ class MonthlyReport:
     def print_report(self):
         """ Print the report!!
 
+        Generate report
+
         Final output includes:
         - Attendance in calendar view
         - Total classes taken
         - Average class per week
         - Classes taken sorted by attendance
         """
+        self.__generate_report()
 
         # Calendar view
         print(self.report_str)
