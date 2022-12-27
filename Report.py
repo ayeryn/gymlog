@@ -10,7 +10,6 @@ class MonthlyReport:
         self.year = year
         self.cal = calendar.month(int(self.year), int(self.month)).rstrip()
         self.name = os.getcwd() + '/' + self.year + self.month + '.csv'
-        self.title = 'Monthly Report {}/{}'.format(self.year, self.month)
 
         # Initialize attrs
         self.attendance = {}
