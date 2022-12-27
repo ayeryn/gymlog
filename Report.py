@@ -3,7 +3,7 @@ import os
 import re
 
 
-class Report:
+class MonthlyReport:
 
     def __init__(self, month, year):
         self.month = month
