@@ -1,5 +1,6 @@
 import calendar
 import os
+import re
 
 
 class Report:
@@ -20,12 +21,19 @@ class Report:
         self.num_of_weeks = 0
 
     def process_jnl(self):
-        """Set self.attendance: a dict of date:class
+        """Set self.attendance: a dict of date: list of classes
         """
+
+        split_str = '[,\n]+'
+
         with open(self.name, 'r') as f:
             for line in f:
-                temp = line.split(',')
-                self.attendance[temp[0]] = temp[1].title()
+                temp = re.split(split_str, line)
+
+                if temp[0] not in self.attendance:
+                    self.attendance[temp[0]] = [temp[1].title()]
+                else:
+                    self.attendance[temp[0]].append(temp[1].title())
 
     def print_attendance(self):
         for k, v in self.attendance.items():
@@ -37,7 +45,7 @@ class Report:
         For a string consisting of dates in a week, and what day to process
         among those days, construct new attendance string
 
-        TO DO: this could be better?
+        TODO: this could be better?
         """
 
         # Pad single-digit days
@@ -85,22 +93,21 @@ class Report:
             # Process days
             for d in days:
 
-                # rep += days_str
                 if d in self.attendance:
                     self.total_classes += 1
                     days_str = self.__insert_class(days_str, d, 1)
 
-                    # Add to class tally
-                    class_name = self.attendance[d]
-                    self.classes.add(class_name)
-                    if class_name in self.class_tally:
-                        self.class_tally[class_name] += 1
-                    else:
-                        self.class_tally[class_name] = 1
+                    # Add all classes of same day to class tally
+                    for c in self.attendance[d]:
+                        self.classes.add(c)
+                        if c in self.class_tally:
+                            self.class_tally[c] += 1
+                        else:
+                            self.class_tally[c] = 1
                 else:
                     days_str = self.__insert_class(days_str, d)
 
-            # Add attendance for week and
+            # Add attendance for week
             self.report_str += days_str
             self.report_str += '\n'
 
