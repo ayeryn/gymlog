@@ -1,9 +1,13 @@
 from flask import Flask
+
 app = Flask(__name__)
 
 
-@app.route("/")
-def hello():
+# If multiple routes point to the same page,
+# add another decorator to the same function
+@app.route('/')
+@app.route('/home')
+def home():
     return "<h1>Home!</h1>"
 
 
