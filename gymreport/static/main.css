@@ -1,10 +1,7 @@
 body {
-    background: #F1F7B5;
+    background: #5F9DF7;
     color: #333333;
-    margin-top: 5rem;
-    /* background-image: url("bg.jpg"); */
-    background-size: cover;
-    background-position: center;
+    height: 100vh;
 }
 
 h1,
@@ -13,7 +10,21 @@ h3,
 h4,
 h5,
 h6 {
-    color: #FD8A8A;
+    color: #FD841F
+}
+
+header {
+    height: 10%;
+}
+
+main {
+    background-image: url(bg.jpg);
+    height: 90%;
+    background-position: center;
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: cover;
 }
 
 .header-text:hover {
@@ -21,7 +32,7 @@ h6 {
 }
 
 .site-nav-bg {
-    background-color: #9EA1D4;
+    background-color: #5F9DF7;
 }
 
 .navbar-brand {
