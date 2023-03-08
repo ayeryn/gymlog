@@ -4,7 +4,7 @@ from datetime import datetime
 class Class(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
-    type = db.Column(db.String(20))
+    class_type = db.Column(db.String(20))
 
     def __repr__(self) -> str:
         return f"Class('{self.name}', '{self.type}')"
