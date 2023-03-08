@@ -5,11 +5,11 @@ from gymreport.models import GymClass, Attendance
 
 attendance_list = [
     {
-        'class_taken': 1,
+        'class_id': 1,
         'date_attended': '20230109'
     },
     {
-        'class_taken': 3,
+        'class_id': 3,
         'date_attended': '20230309'
     }
 ]
@@ -81,21 +81,21 @@ def attendances():
     return render_template('attendances.html', title='Attendances', attendance_list=attendance_list)
 
 
-@ app.route('/new_class', methods=['GET', 'POST'])
+@ app.route('/new_attendance', methods=['GET', 'POST'])
 def new_attendance():
     form = AttendanceForm()
-    form.class_taken.choices = [(c.id, c.name)
-                                for c in GymClass.query.all()]
+    form.class_id.choices = [(c.id, c.name)
+                             for c in GymClass.query.all()]
 
     if form.validate_on_submit():
-        a = Attendance(class_taken=form.name.data,
+        a = Attendance(class_id=form.class_id.data,
                        date_attended=form.date_attended.data)
         db.session.add(a)
         db.session.commit()
-        flash(f'New attendance added for {form.name.data}!', 'success')
-        return redirect(url_for('classes', title='Classes'))
+        flash(f'New attendance added for {a.class_taken.name}!', 'success')
+        return redirect(url_for('show_class', class_id=a.class_id))
 
-    return render_template('add_class.html', legend='New Class', form=form)
+    return render_template('add_attendance.html', legend='New Attendance', form=form)
 
 # @app.route('/class/<int:class_id>', methods=['GET', 'POST'])
 # def edit_class(class_id):

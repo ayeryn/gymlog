@@ -1,10 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, DateField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError
 from gymreport.models import GymClass
 
+
 class ClassForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired(), Length(min=3, max=20)])
+    name = StringField('Name', validators=[
+                       DataRequired(), Length(min=3, max=20)])
     class_type = StringField('Type')
     submit = SubmitField('Submit')
 
@@ -13,3 +15,9 @@ class ClassForm(FlaskForm):
 
         if c:
             raise ValidationError('Class exists!')
+
+
+class AttendanceForm(FlaskForm):
+    class_id = SelectField('Class', validate_choice=[DataRequired()])
+    date_attended = DateField('Date', validators=[DataRequired()])
+    submit = SubmitField('Submit')
