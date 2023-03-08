@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <h1>Attendances</h1>
+    <ul class="list-group">
+        {% for a in attendance_list %}
+        <li class="list-group-item">
+            <h2><a href="{{ url_for('show_class', class_id=a.class_id) }}">{{ a.class_taken.name }}</a></h2>
+            <p class="article-content">{{ a.date_attended }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

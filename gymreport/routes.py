@@ -3,17 +3,6 @@ from gymreport.forms import ClassForm, AttendanceForm
 from gymreport import app, db
 from gymreport.models import GymClass, Attendance
 
-attendance_list = [
-    {
-        'class_id': 1,
-        'date_attended': '20230109'
-    },
-    {
-        'class_id': 3,
-        'date_attended': '20230309'
-    }
-]
-
 
 @app.route('/')
 @app.route('/home')
@@ -77,7 +66,7 @@ def edit_class(class_id):
 
 @ app.route('/attendances')
 def attendances():
-    # gym_classes = GymClass.query.all()
+    attendance_list = Attendance.query.all()
     return render_template('attendances.html', title='Attendances', attendance_list=attendance_list)
 
 

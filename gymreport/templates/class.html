@@ -2,13 +2,13 @@
 {% block content %}
 <div class="container">
     <h1>{{ gymclass.name }}</h1>
-    <h2>{{ gymclass.class_type}}</h2>
+    <h2 class="text-muted">Type: {{ gymclass.class_type}}</h2>
 </div>
-<!--div class="container">
-    {% for a in attendance_list %}
+<div class="container">
+    {% for a in gymclass.attendance_list %}
     <div class="row">
         {{ a.date_attended }}
     </div>
     {% endfor %}
-</div-->
+</div>
 {% endblock content %}
