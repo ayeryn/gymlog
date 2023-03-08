@@ -1,7 +1,7 @@
 from gymreport import db
 from datetime import datetime
 
-class Class(db.Model):
+class GymClass(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
     class_type = db.Column(db.String(20))

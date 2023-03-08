@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Classes</h1>
+{% for c in gym_classes %} 
+<article class="media content-section">
+    <div class="media-body">
+        <h2><a class="article-title" href="#">{{ c.name }}</a></h2>
+        <p class="article-content">{{ c.class_type }}</p>
+    </div>
+</article>
+{% endfor %}
+{% endblock content %}
