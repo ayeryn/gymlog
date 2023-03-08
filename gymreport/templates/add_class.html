@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="content-section">
-    <form method="'POST" action="">
-        <fieldset class=""form-group">
+    <form method="POST" action="">
+        {{ form.csrf_token }}
+        <fieldset class="form-group">
             <legend class="border-bottom mb-b">{{ legend }}</legend>
             <div class="form-group">
                 {{ form.name.label(class="form-control-label") }}
