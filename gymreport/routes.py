@@ -36,14 +36,30 @@ def new_class():
     form = ClassForm()
 
     if form.validate_on_submit():
-        flash('Valid data!!!', 'success')
         c = GymClass(name=capitalize_str(form.name.data), class_type=form.class_type.data)
         db.session.add(c)
         db.session.commit()
         flash('New class added!', 'success')
         return redirect(url_for('classes', title='Classes'))
-    elif request.method=='GET':
-        flash('GET')
-    else:
-        flash('Validation failed?')
+    
+
     return render_template('add_class.html', legend='New Class', form=form)
+
+@app.route('/class/<int:class_id>', methods=['GET', 'POST'])
+def edit_class(class_id):
+    c = GymClass.query.get(class_id)
+
+    form = ClassForm()
+
+    if c and form.validate_on_submit():
+        c.name=capitalize_str(form.name.data)
+        c.class_type=form.class_type.data
+        db.session.add(c)
+        db.session.commit()
+        flash('Class updated!', 'success')
+    elif request.method == 'GET':
+        form.name.data = c.name
+        form.class_type.data = c.class_type
+        return render_template('add_class.html', legend='Update class', form=form)
+    
+    return redirect(url_for('classes'))
