@@ -37,7 +37,7 @@ def new_class():
 
     if form.validate_on_submit():
         flash('Valid data!!!', 'success')
-        c = GymClass(name=form.name.data, class_type=form.class_type.data)
+        c = GymClass(name=capitalize_str(form.name.data), class_type=form.class_type.data)
         db.session.add(c)
         db.session.commit()
         flash('New class added!', 'success')
