@@ -1,12 +1,25 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Classes</h1>
-{% for c in gym_classes %}
-<article class="media content-section">
-    <div class="media-body">
-        <h2><a class="article-title" href="{{ url_for('show_class', class_id=c.id) }}">{{ c.name }}</a></h2>
-        <p class="article-content">{{ c.class_type }}</p>
-    </div>
-</article>
-{% endfor %}
+<div class="container">
+    <h1>Classes</h1>
+    {% for c in gym_classes %}
+    <article class="media content-section">
+        <div class="row">
+            <div class="col-9">
+                <h3><a class="article-title" href="{{ url_for('show_class', class_id=c.id) }}">{{ c.name }}</a></h3>
+            </div>
+            <div class="col">
+                <h4>{{ c.class_type }}</h4>
+            </div>
+        </div>
+        <ul class="list-group"></ul>
+        {% for a in c.attendance_list %}
+        <li class="list-group-item">
+            <p class="article-content">{{ a.date_attended }}</p>
+        </li>
+        {% endfor %}
+        </ul>
+    </article>
+    {% endfor %}
+</div>
 {% endblock content %}
