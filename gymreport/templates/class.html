@@ -5,7 +5,7 @@
         <h2 class="article-title">{{ gymclass.name }}</h2>
         <h4 class="text-muted">Type: {{ gymclass.class_type}}</h4>
         <div class="container">
-            {% for a in gymclass.attendance_list %}
+            {% for a in gymclass.attendance_list|sort %}
             <div class="row">
                 {{ a.date_attended.strftime('%Y-%m-%d') }}
             </div>
