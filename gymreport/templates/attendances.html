@@ -1,14 +1,46 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container">
-    <h1>Attendances</h1>
-    <ul class="list-group">
-        {% for a in attendance_list %}
-        <li class="list-group-item">
-            <h2><a href="{{ url_for('show_class', class_id=a.class_id) }}">{{ a.class_taken.name }}</a></h2>
-            <p class="article-content">{{ a.date_attended }}</p>
-        </li>
-        {% endfor %}
-    </ul>
+<div class="container-fluid solid-bg">
+    <div class="row align-items-center">
+        <div class="col-3">
+            <h1>Attendances</h1>
+        </div>
+        <div class="col-2">
+            <a href="{{ url_for('new_attendance') }}" class="btn btn-sm btn-primary">Add Attendance</a>
+        </div>
+    </div>
+    {% for a in attendance_list|sort(reverse = True) %}
+    <div class="row">
+        <div class="col-2">
+            <p>{{ a.date_attended.strftime('%Y-%m-%d') }}</p>
+        </div>
+        <div class="col-4">
+            <p><a class="site-link" href="{{ url_for('show_class', class_id=a.class_id) }}">{{ a.class_taken.name }}</a>
+            </p>
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal"
+                data-bs-target="#deleteModal">Delete</button>
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete Attendance?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <form action="{{ url_for('delete_attendance', attendance_id=a.id) }}" method="POST">
+                                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock content %}

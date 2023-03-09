@@ -20,7 +20,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light site-nav-bg">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Gym Report</a>
+                <a class="navbar-brand site-link" href="#">Gym Report</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -31,18 +31,17 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Attendances
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ url_for('classes') }}">By Class</a></li>
-                                <li><a class="dropdown-item" href="{{ url_for('attendances') }}">By Date</a></li>
-                            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link nav-text" href="{{ url_for('classes') }}">Classes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"="true">Register</a>
+                            <a class="nav-link" href="{{ url_for('attendances') }}">Attendances</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('upload_csv') }}">Upload</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Register</a>
                         </li>
                         <li>
                             <a class="nav-link" href="#">Login</a>
@@ -52,7 +51,7 @@
             </div>
         </nav>
     </header>
-    <main role="main" class="container-fluid">
+    <main role="main" class="container-fluid mt-4">
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">

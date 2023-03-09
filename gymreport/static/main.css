@@ -1,5 +1,6 @@
 body {
-    background: #5F9DF7;
+    /* background: #89cff0; */
+    background: #cdebf9;
     color: #333333;
     height: 100vh;
 }
@@ -10,7 +11,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #FD841F
+    color: #FD841F;
 }
 
 header {
@@ -27,12 +28,32 @@ main {
     background-size: cover;
 }
 
+hr {
+    color: #006dd3;
+}
+
 .header-text:hover {
     color: #3A1078;
 }
 
+.solid-bg {
+    background-color: #cdebf9;
+}
+
+.nav-text {
+    color: pink;
+}
+
+.site-link {
+    color: #00008B;
+}
+
+a.site-link:hover {
+    color: #FD841F;
+}
+
 .site-nav-bg {
-    background-color: #5F9DF7;
+    background-color: #89cff0;
 }
 
 .navbar-brand {
