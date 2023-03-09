@@ -18,6 +18,7 @@ class ClassForm(FlaskForm):
 
 
 class AttendanceForm(FlaskForm):
-    class_id = SelectField('Class', validate_choice=[DataRequired()])
+    class_id = SelectField('Class', validate_choice=[
+                           DataRequired()], coerce=int)
     date_attended = DateField('Date', validators=[DataRequired()])
     submit = SubmitField('Submit')
