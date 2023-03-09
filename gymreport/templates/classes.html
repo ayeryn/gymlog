@@ -2,24 +2,28 @@
 {% block content %}
 <div class="container">
     <h1>Classes</h1>
-    {% for c in gym_classes %}
-    <article class="media content-section">
-        <div class="row">
-            <div class="col-9">
-                <h3><a class="article-title" href="{{ url_for('show_class', class_id=c.id) }}">{{ c.name }}</a></h3>
-            </div>
-            <div class="col">
-                <h4>{{ c.class_type }}</h4>
+    <div class="row row-cols-1 row-cols-md-2">
+        {% for c in gym_classes %}
+        <div class="col mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        {{ c.name }}
+                    </h3>
+                    <h5 class="card-subtitle mb-2 text-muted">{{ c.class_type }}</h5>
+                    <p class="card-text">
+                    <ul class="list-group list-group-flush"></ul>
+                    {% for a in c.attendance_list %}
+                    <li class="list-group-item">
+                        <p class="article-content">{{ a.date_attended.strftime('%Y-%m-%d') }}</p>
+                    </li>
+                    {% endfor %}
+                    </ul>
+                    <a href="{{ url_for('show_class', class_id=c.id) }}" class="btn btn-primary">View All Attendance</a>
+                </div>
             </div>
         </div>
-        <ul class="list-group"></ul>
-        {% for a in c.attendance_list %}
-        <li class="list-group-item">
-            <p class="article-content">{{ a.date_attended }}</p>
-        </li>
         {% endfor %}
-        </ul>
-    </article>
-    {% endfor %}
+    </div>
 </div>
 {% endblock content %}
