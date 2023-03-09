@@ -128,18 +128,21 @@ def edit_attendance(attendance_id):
 
     return redirect(url_for('attendances'))
 
-# TODO: delete_attendance
+
+@app.route('/attendance/<int:attendance_id>/delete', methods=['POST'])
+def delete_attendance(attendance_id):
+    a = Attendance.query.get(attendance_id)
+    db.session.delete(a)
+    db.session.commit()
+    flash(f'Attendance has been deleted!', 'success')
+
+    return redirect(url_for('attendances'))
 
 
 """
 CSV loader
 """
 ALLOWED_EXTENTIONS = set(['.csv'])
-
-
-def allowed_file(filename):
-
-    return f_ext in ALLOWED_EXTENTIONS
 
 
 def process_csv_row(data, filename):
