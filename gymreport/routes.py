@@ -2,6 +2,7 @@ from flask import render_template, flash, redirect, url_for, request
 from gymreport.forms import ClassForm, AttendanceForm
 from gymreport import app, db
 from gymreport.models import GymClass, Attendance
+import os
 
 
 @app.route('/')
@@ -123,3 +124,31 @@ def edit_attendance(attendance_id):
         return render_template('add_attendance.html', legend='Update Attendance', form=form)
 
     return redirect(url_for('attendances'))
+
+
+"""
+CSV loader
+"""
+ALLOWED_EXTENTIONS = set(['.csv'])
+
+
+def allowed_file(filename):
+    _, f_ext = os.path.splitext(filename)
+    # flash(f'ext = {f_ext}')
+    return f_ext in ALLOWED_EXTENTIONS
+
+
+@ app.route('/upload', methods=['GET', 'POST'])
+def upload_csv():
+    if request.method == 'POST':
+        file = request.files['file']
+        # flash(f'filename = {file.filename}')
+        if file and allowed_file(file.filename):
+            file_path = os.path.join(
+                app.root_path, 'csv/', file.filename)
+            # flash(f'File path = {file_path}')
+            file.save(file_path)
+
+        return redirect(url_for('classes'))
+
+    return render_template('upload.html', title="Upload CSV")

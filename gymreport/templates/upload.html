@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <form action="/upload" method="POST" enctype="multipart/form-data" class="form-group">
+            <label for="file">
+                File:
+            </label>
+            <input type="file" id="file" name="file">
+            <button>Upload</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
