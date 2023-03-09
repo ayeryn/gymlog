@@ -5,7 +5,7 @@ from datetime import datetime
 class GymClass(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
-    class_type = db.Column(db.String(10), default='Workout')
+    class_type = db.Column(db.String(3), default='Workout')
     attendance_list = db.relationship(
         'Attendance', backref='class_taken', lazy=True)
 
