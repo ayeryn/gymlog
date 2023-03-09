@@ -11,6 +11,8 @@
             </div>
             {% endfor %}
             <div>
+                <a class="btn btn-primary btn-sm m-1" href="{{ url_for('new_attendance') }}">Add
+                    Attendance</a>
                 <a class="btn btn-secondary btn-sm m-1"
                     href="{{ url_for('edit_class', class_id=gymclass.id) }}">Update</a>
                 <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal"
