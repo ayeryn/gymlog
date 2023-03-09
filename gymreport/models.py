@@ -21,4 +21,8 @@ class Attendance(db.Model):
                               default=datetime.utcnow)
 
     def __repr__(self) -> str:
-        return f'Attendance(class={self.class_taken.name}, date_attended={self.date_attended}'
+        return self.date_attended.strftime("%Y-%m-%d")
+
+    # Make object sortable
+    def __lt__(self, other):
+        return self.date_attended < other.date_attended
