@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <h1>Classes</h1>
+        </div>
+        <div class="col-2">
+            <a href="{{ url_for('new_class') }}" class="btn btn-primary">Add Class</a>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for c in gym_classes %}
+        <div class="col mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        {{ c.name }}
+                    </h3>
+                    <h5 class="card-subtitle mb-2 text-muted">{{ c.class_type }}</h5>
+                    <p class="card-text">
+                    <ul class="list-group list-group-flush"></ul>
+                    {% for a in c.attendance_list %}
+                    <li class="list-group-item">
+                        <p class="article-content">{{ a.date_attended.strftime('%Y-%m-%d') }}</p>
+                    </li>
+                    {% endfor %}
+                    </ul>
+                    <a href="{{ url_for('edit_class', class_id=c.id) }}" class="btn btn-primary">Update</a>
+                    <a href="{{ url_for('show_class', class_id=c.id) }}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
