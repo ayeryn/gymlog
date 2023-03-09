@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container-fluid">
+<div class="container-fluid solid-bg">
     <div class="row">
         <div class="col-2">
             <h1>Classes</h1>
@@ -14,18 +14,14 @@
         <div class="col mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title">
+                    <h4 class="card-title">
                         {{ c.name }}
-                    </h3>
-                    <h5 class="card-subtitle mb-2 text-muted">{{ c.class_type }}</h5>
+                    </h4>
+                    <p class="card-subtitle mb-2 text-muted">{{ c.class_type }}</p>
                     <p class="card-text">
-                    <ul class="list-group list-group-flush"></ul>
-                    {% for a in c.attendance_list %}
-                    <li class="list-group-item">
-                        <p class="article-content">{{ a.date_attended.strftime('%Y-%m-%d') }}</p>
-                    </li>
-                    {% endfor %}
-                    </ul>
+                        Total Attendance: {{ c.attendance_list|length }} </br>
+                        Most recent attendance: {{ c.attendance_list|sort|first }}
+                    </p>
                     <a href="{{ url_for('edit_class', class_id=c.id) }}" class="btn btn-primary">Update</a>
                     <a href="{{ url_for('show_class', class_id=c.id) }}" class="btn btn-primary">View</a>
                 </div>
