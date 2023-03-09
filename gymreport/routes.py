@@ -3,6 +3,9 @@ from gymreport.forms import ClassForm, AttendanceForm
 from gymreport import app, db
 from gymreport.models import GymClass, Attendance
 import os
+from io import TextIOWrapper
+from datetime import datetime
+import csv
 
 
 @app.route('/')
@@ -133,21 +136,47 @@ ALLOWED_EXTENTIONS = set(['.csv'])
 
 
 def allowed_file(filename):
-    _, f_ext = os.path.splitext(filename)
-    # flash(f'ext = {f_ext}')
+
     return f_ext in ALLOWED_EXTENTIONS
+
+
+def process_csv_row(data, filename):
+    # Parse filename
+    year = filename[:4]
+    month = filename[4:]
+
+    # Parse row
+    day = data[0]
+    class_name = capitalize_str(data[1])
+
+    date = datetime.strptime(year+month+day, '%Y%m%d')
+    return class_name, date
 
 
 @ app.route('/upload', methods=['GET', 'POST'])
 def upload_csv():
     if request.method == 'POST':
         file = request.files['file']
-        # flash(f'filename = {file.filename}')
-        if file and allowed_file(file.filename):
-            file_path = os.path.join(
-                app.root_path, 'csv/', file.filename)
-            # flash(f'File path = {file_path}')
-            file.save(file_path)
+        f_name, f_ext = os.path.splitext(file.filename)
+
+        if file and f_ext in ALLOWED_EXTENTIONS:
+            file = TextIOWrapper(file, encoding='utf-8')
+            csv_reader = csv.reader(file, delimiter=',')
+            for row in csv_reader:
+                class_name, date = process_csv_row(row, f_name)
+
+                # Add GymClass if class doesn't exists
+                c = GymClass.query.filter_by(name=class_name).first()
+                if not c:
+                    c = GymClass(name=class_name)
+                    db.session.add(c)
+                    db.session.commit()
+                    flash(f'Class {class_name} created from csv', 'success')
+
+                a = Attendance(class_id=c.id, date_attended=date)
+                db.session.add(a)
+                db.session.commit()
+                flash(f'New attendance create for {class_name}', 'success')
 
         return redirect(url_for('classes'))
 
