@@ -43,16 +43,12 @@ def new_class():
 @app.route('/class/<int:class_id>')
 def show_class(class_id):
     c = GymClass.query.get(class_id)
-    # attendance_list = Attendance.query.filter_by(class_taken=class_id)
-
     return render_template('class.html', legend=c.name, gymclass=c)
-    # return render_template('class.html', legend17=c.name, gymclass=c, attendance_list=attendance_list)
 
 
 @app.route('/class/<int:class_id>/update', methods=['GET', 'POST'])
 def edit_class(class_id):
     c = GymClass.query.get(class_id)
-
     form = ClassForm()
 
     if c and form.validate_on_submit():
@@ -61,10 +57,23 @@ def edit_class(class_id):
         db.session.add(c)
         db.session.commit()
         flash('Class updated!', 'success')
+
     elif request.method == 'GET':
         form.name.data = c.name
         form.class_type.data = c.class_type
         return render_template('add_class.html', legend='Update class', form=form)
+
+    return redirect(url_for('classes'))
+
+
+@app.route('/class/<int:class_id>/delete', methods=['POST'])
+def delete_class(class_id):
+    c = GymClass.query.get(class_id)
+    class_name = c.name
+
+    db.session.delete(c)
+    db.session.commit()
+    flash(f'{class_name} has been deleted!', 'success')
 
     return redirect(url_for('classes'))
 
