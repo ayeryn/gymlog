@@ -1,7 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container">
-    <h1>Attendances</h1>
+<div class="container-fluid solid-bg">
+    <div class="row">
+        <div class="col-3">
+            <h1>Attendances</h1>
+        </div>
+        <div class="col-2">
+            <a href="{{ url_for('new_attendance') }}" class="btn btn-primary">Add Attendance</a>
+        </div>
+    </div>
     <ul class="list-group">
         {% for a in attendance_list %}
         <li class="list-group-item">

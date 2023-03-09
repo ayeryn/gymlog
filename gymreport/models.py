@@ -12,6 +12,10 @@ class GymClass(db.Model):
     def __repr__(self) -> str:
         return f'Class(name={self.name}, type={self.class_type})'
 
+    # Make object sortable by name
+    def __lt__(self, other):
+        return self.name < other.name
+
 
 class Attendance(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,6 +27,6 @@ class Attendance(db.Model):
     def __repr__(self) -> str:
         return self.date_attended.strftime("%Y-%m-%d")
 
-    # Make object sortable
+    # Make object sortable by date
     def __lt__(self, other):
         return self.date_attended < other.date_attended
