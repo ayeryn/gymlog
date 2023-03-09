@@ -11,7 +11,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #FD841F
+    color: #FD841F;
 }
 
 header {
@@ -26,6 +26,10 @@ main {
     background-repeat: no-repeat;
     /* Do not repeat the image */
     background-size: cover;
+}
+
+hr {
+    color: #006dd3;
 }
 
 .header-text:hover {
