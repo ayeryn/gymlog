@@ -128,6 +128,8 @@ def edit_attendance(attendance_id):
 
     return redirect(url_for('attendances'))
 
+# TODO: delete_attendance
+
 
 """
 CSV loader

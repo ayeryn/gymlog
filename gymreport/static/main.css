@@ -1,5 +1,6 @@
 body {
-    background: #89cff0;
+    /* background: #89cff0; */
+    background: #cdebf9;
     color: #333333;
     height: 100vh;
 }
@@ -35,10 +36,17 @@ main {
     background-color: #cdebf9;
 }
 
-.container-fluid {
-    background-color: #cdebf9;
+.nav-text {
+    color: pink;
 }
 
+.site-link {
+    color: #00008B;
+}
+
+a.site-link:hover {
+    color: #FD841F;
+}
 
 .site-nav-bg {
     background-color: #89cff0;

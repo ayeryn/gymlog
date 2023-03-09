@@ -6,7 +6,7 @@
             <h1>Classes</h1>
         </div>
         <div class="col-2">
-            <a href="{{ url_for('new_class') }}" class="btn btn-primary">Add Class</a>
+            <a href="{{ url_for('new_class') }}" class="btn btn-sm btn-primary">Add Class</a>
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-3">
@@ -20,10 +20,10 @@
                     <p class="card-subtitle mb-2 text-muted">{{ c.class_type }}</p>
                     <p class="card-text">
                         Total Attendance: <strong>{{ c.attendance_list|length }} </strong></br>
-                        Most recent attendance: <strong>{{ c.attendance_list|sort|first }}</strong>
+                        Most recent attendance: <strong>{{ c.attendance_list|sort(reverse = True)|first }}</strong>
                     </p>
-                    <a href="{{ url_for('edit_class', class_id=c.id) }}" class="btn btn-primary">Update</a>
-                    <a href="{{ url_for('show_class', class_id=c.id) }}" class="btn btn-primary">View</a>
+                    <a href="{{ url_for('edit_class', class_id=c.id) }}" class="btn btn-warning">Update</a>
+                    <a href="{{ url_for('show_class', class_id=c.id) }}" class="btn btn-info">View</a>
                 </div>
             </div>
         </div>
