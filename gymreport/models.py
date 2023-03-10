@@ -21,7 +21,7 @@ class Attendance(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     class_id = db.Column(db.Integer, db.ForeignKey(
         'gym_class.id'), nullable=False)
-    date_attended = db.Column(db.DateTime, nullable=False,
+    date_attended = db.Column(db.Date, nullable=False,
                               default=datetime.utcnow)
 
     def __repr__(self) -> str:
