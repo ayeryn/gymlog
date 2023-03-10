@@ -133,3 +133,6 @@ test.py
 gym_report.code-workspace
 Python OOP Notes.md
 .DS_Store
+
+# Dev env
+/migrations
