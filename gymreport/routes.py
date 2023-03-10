@@ -186,3 +186,13 @@ def upload_csv():
         return redirect(url_for('classes'))
 
     return render_template('upload.html', title="Upload CSV")
+
+
+"""
+Report related
+"""
+
+
+@app.route('/reports')
+def reports():
+    return render_template('reports.html', title='Reports')
