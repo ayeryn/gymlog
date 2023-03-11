@@ -30,11 +30,7 @@ def format_month():
     """
     now = date.today()
     cal = HTMLCalendar()
-    # cal.cssclasses = [x+' cal-text' for x in cal.cssclasses]
     cal_html = cal.formatmonth(theyear=now.year, themonth=now.month)
-
-    # format today
-    # cal_html = format_day(cal_html, now)
 
     # Format days with workouts
     curr_month_start = now.replace(day=1)
@@ -64,7 +60,8 @@ Class related endpoints
 
 @app.route('/classes')
 def classes():
-    gym_classes = GymClass.query.all()
+    page = request.args.get('page', 1, type=int)
+    gym_classes = GymClass.query.paginate(page=page, per_page=9)
     return render_template('classes.html', title='Classes', gym_classes=gym_classes)
 
 
@@ -132,7 +129,8 @@ Attendance related endpoints
 
 @app.route('/attendances')
 def attendances():
-    attendance_list = Attendance.query.all()
+    page = request.args.get('page', 1, type=int)
+    attendance_list = Attendance.query.paginate(page=page, per_page=15)
     return render_template('attendances.html', title='Attendances', attendance_list=attendance_list)
 
 
