@@ -61,7 +61,8 @@ Class related endpoints
 @app.route('/classes')
 def classes():
     page = request.args.get('page', 1, type=int)
-    gym_classes = GymClass.query.paginate(page=page, per_page=9)
+    gym_classes = GymClass.query.order_by(
+        GymClass.name).paginate(page=page, per_page=9)
     return render_template('classes.html', title='Classes', gym_classes=gym_classes)
 
 
@@ -130,7 +131,8 @@ Attendance related endpoints
 @app.route('/attendances')
 def attendances():
     page = request.args.get('page', 1, type=int)
-    attendance_list = Attendance.query.paginate(page=page, per_page=15)
+    attendance_list = Attendance.query.order_by(
+        Attendance.date_attended.desc()).paginate(page=page, per_page=15)
     return render_template('attendances.html', title='Attendances', attendance_list=attendance_list)
 
 
