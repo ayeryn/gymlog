@@ -126,3 +126,18 @@ a.article-title:hover {
 .account-heading {
     font-size: 2.5rem;
 }
+
+/* calendar styling */
+.cal-today {
+    color: #FD841F;
+    text-decoration: underline;
+}
+
+.cal-text-attend {
+    font-weight: bold;
+}
+
+.sat {
+    /* font-weight: bold; */
+    /* margin-right: 10; */
+}

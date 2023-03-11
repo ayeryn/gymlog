@@ -1,4 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Welcome to Gym Report</h1>
+<div class="container-fluid">
+    <h1>Welcome to Gym Report</h1>
+    {{ cal_html|safe }}
+</div>
 {% endblock content %}

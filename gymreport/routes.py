@@ -4,14 +4,57 @@ from gymreport import app, db
 from gymreport.models import GymClass, Attendance
 import os
 from io import TextIOWrapper
-from datetime import datetime
+from datetime import date, timedelta
+from calendar import HTMLCalendar
 import csv
+from re import search
+
+
+def format_day(html, day, style_class='cal-text-attend'):
+    pat = f'class="[a-z]+">{day.day}<'
+    s_ind, e_ind = search(pat, html).span()
+    weekday = day.strftime('%a').lower()
+    if day == date.today():
+        rs = f'class="{weekday} {style_class} cal-today">{day.day}<'
+    else:
+        rs = f'class="{weekday} {style_class}">{day.day}<'
+
+    return html.replace(html[s_ind:e_ind], rs)
+
+
+def format_month():
+    """
+    Add styling on top of HTMLCalendar format
+    - add cal-today to today's class
+    - add cal-text to the rest of the month
+    """
+    now = date.today()
+    cal = HTMLCalendar()
+    # cal.cssclasses = [x+' cal-text' for x in cal.cssclasses]
+    cal_html = cal.formatmonth(theyear=now.year, themonth=now.month)
+
+    # format today
+    # cal_html = format_day(cal_html, now)
+
+    # Format days with workouts
+    curr_month_start = now.replace(day=1)
+    next_month_start = (curr_month_start + timedelta(days=32)).replace(day=1)
+    days_attended = db.session.query(Attendance).filter(
+        Attendance.date_attended >= curr_month_start, Attendance.date_attended < next_month_start)
+
+    for d in days_attended:
+        print(f'd.date_attended = {d.date_attended}')
+        cal_html = format_day(cal_html, d.date_attended)
+
+    return cal_html
 
 
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('home.html')
+
+    cal_html = format_month()
+    return render_template('home.html', cal_html=cal_html)
 
 
 """
@@ -154,8 +197,8 @@ def process_csv_row(data, filename):
     day = data[0]
     class_name = capitalize_str(data[1])
 
-    date = datetime.strptime(year+month+day, '%Y%m%d')
-    return class_name, date
+    date_attended = date(int(year), int(month), int(day))
+    return class_name, date_attended
 
 
 @ app.route('/upload', methods=['GET', 'POST'])
