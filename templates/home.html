@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container-fluid">
-    <h1>Welcome to GymLog</h1>
+    <h1 class="welcome-text">Keep it going 💪</h1>
     {{ cal_html|safe }}
     <div class="container-fluid solid-bg">
         {% for a in activities %}
@@ -15,8 +15,8 @@
                     <p class="card-text">
                         Latest attendance: Today
                     </p>
-                    <a href="#" class="btn btn-sm btn-warning">Update</a>
-                    <a href="#" class="btn btn-sm btn-info">View</a>
+                    <a href="#" class="btn btn-sm btn-update">Update</a>
+                    <a href="#" class="btn btn-sm btn-view">View</a>
                 </div>
             </div>
         </div>

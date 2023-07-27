@@ -1,8 +1,10 @@
 body {
-    /* background: #89cff0; */
-    background: #cdebf9;
+    /* background: #cdebf9; */
     color: #333333;
     height: 100vh;
+    background: repeating-linear-gradient(45deg,
+            #A1E8A1,
+            #f9cdff 55px)
 }
 
 h1,
@@ -140,4 +142,17 @@ a.article-title:hover {
 .sat {
     /* font-weight: bold; */
     /* margin-right: 10; */
+}
+
+.btn-update {
+    background-color: #f9cdff
+}
+
+.btn-view {
+    background-color: #7CDF7C
+}
+
+.welcome-text {
+    /* border: 5px solid #F1C0B9; */
+    background-color: #f9cdff;
 }
