@@ -1,10 +1,17 @@
+/* Color Vars */
+:root {
+    --lime: #7CDF7C;
+    --pink: #f9cdff;
+    --litelime: #A1E8A1;
+}
+
 body {
     /* background: #cdebf9; */
     color: #333333;
     height: 100vh;
     background: repeating-linear-gradient(45deg,
-            #A1E8A1,
-            #f9cdff 55px)
+            var(--litelime),
+            var(--pink) 55px)
 }
 
 h1,
@@ -39,7 +46,7 @@ hr {
 }
 
 .solid-bg {
-    background-color: #cdebf9;
+    background-color: var(--litelime);
 }
 
 .nav-text {
@@ -63,7 +70,7 @@ a.site-link:hover {
 }
 
 .site-header .navbar-nav .nav-link {
-    color: #A8D1D1;
+    color: var(--lime);
 }
 
 .site-header .navbar-nav .nav-link:hover {
@@ -145,14 +152,14 @@ a.article-title:hover {
 }
 
 .btn-update {
-    background-color: #f9cdff
+    background-color: var(--pink)
 }
 
 .btn-view {
-    background-color: #7CDF7C
+    background-color: var(--litelime)
 }
 
 .welcome-text {
     /* border: 5px solid #F1C0B9; */
-    background-color: #f9cdff;
+    background-color: var(--pink)
 }
