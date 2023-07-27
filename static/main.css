@@ -1,0 +1,143 @@
+body {
+    /* background: #89cff0; */
+    background: #cdebf9;
+    color: #333333;
+    height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #32CD32;
+}
+
+header {
+    height: 7%;
+}
+
+main {
+    background-image: url(bg.jpg);
+    height: 90%;
+    background-position: center;
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: cover;
+}
+
+hr {
+    color: #006dd3;
+}
+
+.header-text:hover {
+    color: #3A1078;
+}
+
+.solid-bg {
+    background-color: #cdebf9;
+}
+
+.nav-text {
+    color: pink;
+}
+
+.site-link {
+    color: #00008B;
+}
+
+a.site-link:hover {
+    color: #FD841F;
+}
+
+.site-nav-bg {
+    background-color: #89cff0;
+}
+
+.navbar-brand {
+    color: #3A1078;
+}
+
+.site-header .navbar-nav .nav-link {
+    color: #A8D1D1;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.article-title {
+    color: #001E6C;
+}
+
+a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+}
+
+.article-content {
+    white-space: pre-line;
+}
+
+.article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+}
+
+.article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.account-heading {
+    font-size: 2.5rem;
+}
+
+/* calendar styling */
+.cal-today {
+    color: #FD841F;
+    text-decoration: underline;
+}
+
+.cal-text-attend {
+    font-weight: bold;
+}
+
+.sat {
+    /* font-weight: bold; */
+    /* margin-right: 10; */
+}
