@@ -24,12 +24,12 @@ class User(db.Model):
     attendances = db.Relationship('Attendance', backref='user', lazy=True)
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.avatar_file}')"
+        return f"User('{self.id}', '{self.username}', '{self.email}', '{self.avatar_file}')"
 
 
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(25), unique=True, nullable=False)
+    name = db.Column(db.String(15), unique=True, nullable=False)
     category = db.Column(db.String(15), unique=True, nullable=False)
     attendances = db.Relationship('Attendance', backref='activity', lazy=True)
 
