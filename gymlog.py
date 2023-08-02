@@ -47,32 +47,13 @@ class Attendance(db.Model):
         db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
-        return f"Attendance('{self.activity_name}', '{self.date_attended}')"
-
-
-activities = [
-    {
-        'name': 'swimming',
-        'category': 'cardio'
-    },
-    {
-        'name': 'upper body training',
-        'category': 'strength'
-    },
-    {
-        'name': 'vinyasa',
-        'category': 'yoga'
-    },
-    {
-        'name': 'incline hike',
-        'category': 'cardio'
-    }
-]
+        return f"Attendance('{self.activity_id}', '{self.user_id}',{self.date_attended}')"
 
 
 @app.route("/")
 @app.route("/home")
 def home():
+    activities = Activity.query.all()
     return render_template("home.html", activities=activities)
 
 
