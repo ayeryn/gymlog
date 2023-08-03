@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect
 from app import app, db
 from app.models import User, Activity, Attendance
 from app.forms import RegistrationForm, LoginForm
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 
 
 @app.route("/")
@@ -48,3 +48,9 @@ def login():
         flash('Invalid email or password')
         return redirect(url_for('login'))
     return render_template('login.html', title='Login', form=form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
