@@ -3,6 +3,7 @@ from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from forms import RegistrationForm, LoginForm
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 
@@ -11,7 +12,6 @@ app.config["SECRET_KEY"] = "85d7836bac21fafd3ed57a1d18c06518"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 
 db = SQLAlchemy(app)
-Migrate = Migrate(app, db)
 
 
 class User(db.Model):
