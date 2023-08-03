@@ -15,5 +15,6 @@ migrate = Migrate(app, db, render_as_batch=True)
 bcrypt = Bcrypt(app)
 login = LoginManager(app)
 login.login_view = 'login'
+login.login_message_category = 'info'
 
 from app import routes, models
