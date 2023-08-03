@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect
 from app import app, db
 from app.models import User, Activity, Attendance
 from app.forms import RegistrationForm, LoginForm
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 
 
 @app.route("/")
@@ -54,3 +54,8 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route('/account')
+@login_required
+def account():
+    return render_template('account.html', title='Account')

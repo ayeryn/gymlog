@@ -14,5 +14,6 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db, render_as_batch=True)
 bcrypt = Bcrypt(app)
 login = LoginManager(app)
+login.login_view = 'login'
 
 from app import routes, models
