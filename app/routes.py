@@ -3,7 +3,7 @@ from app import app
 from app.models import User, Activity, Attendance
 from app.forms import RegistrationForm, LoginForm
 
-activities = [
+t_activities = [
     {
         'name': 'swimming',
         'category': 'cardio'
@@ -25,7 +25,7 @@ activities = [
 @app.route("/")
 @app.route("/home")
 def home():
-    # activities = Activity.query.all()
+    activities = Activity.query.all()
     return render_template("home.html", activities=activities)
 
 
