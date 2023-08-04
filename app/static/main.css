@@ -3,6 +3,8 @@
     --lime: #7CDF7C;
     --pink: #f9cdff;
     --litelime: #A1E8A1;
+    --litepink: #fce6ff;
+
 }
 
 body {
@@ -162,4 +164,23 @@ a.article-title:hover {
 .welcome-text {
     /* border: 5px solid #F1C0B9; */
     background-color: var(--pink)
+}
+
+.content-section {
+    background: var(--litepink);
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.account-heading {
+    font-size: 2.5rem;
 }
