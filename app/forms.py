@@ -59,3 +59,23 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError(
                     'That email is taken, please choose a different one.')
+
+
+class ClassForm(FlaskForm):
+    name = StringField('Name', validators=[
+                       DataRequired(), Length(min=3, max=20)])
+    class_type = StringField('Type')
+    submit = SubmitField('Submit')
+
+    def validate_name(self, name):
+        c = GymClass.query.filter_by(name=name.data).first()
+
+        if c:
+            raise ValidationError('Class exists!')
+
+
+class AttendanceForm(FlaskForm):
+    class_id = SelectField('Class', validate_choice=[
+                           DataRequired()], coerce=int)
+    date_attended = DateField('Date', validators=[DataRequired()])
+    submit = SubmitField('Submit')
