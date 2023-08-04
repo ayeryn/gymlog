@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.csrf_token }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-b">{{ legend }}</legend>
+            <div class="form-group">
+                {{ form.class_id.label(class="form-control-label") }}
+                {% if form.class_id.errors %}
+                {{ form.class_id(class="form-control from-crontrol-lg is-invalid") }}
+                <div class="invalid-feeback">
+                    {% for error in form.class_id.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.class_id(class="form-control from-crontrol-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.date_attended.label(class="form-control-label") }}
+                {% if form.date_attended.errors %}
+                {{ form.date_attended(class="form-control from-crontrol-lg is-invalid") }}
+                <div class="invalid-feeback">
+                    {% for error in form.date_attended.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.date_attended(class="form-control from-crontrol-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+{% endblock content %}
