@@ -1,4 +1,4 @@
-from gymreport import app
+from app import app
 
 # When python runs a program directly, the module name
 # is __main__

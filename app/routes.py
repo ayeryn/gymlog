@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
-from gymreport.forms import ClassForm, AttendanceForm
-from gymreport import app, db
-from gymreport.models import GymClass, Attendance
+from app.forms import ClassForm, AttendanceForm
+from app import app, db
+from app.models import GymClass, Attendance
 import os
 from io import TextIOWrapper
 from datetime import date, timedelta

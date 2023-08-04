@@ -17,4 +17,4 @@ migrate = Migrate(app, db, compare_type=True)
 # login_manager.login_view = 'login'
 # login_manager.login_message_category = 'info'
 
-from gymreport import routes
+from app import routes

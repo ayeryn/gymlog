@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, DateField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError
-from gymreport.models import GymClass
+from app.models import GymClass
 
 
 class ClassForm(FlaskForm):
