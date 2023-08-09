@@ -1,13 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container-fluid solid-bg">
-    <div class="row align-items-center">
-        <div class="col-2">
-            <h1>Activities</h1>
-        </div>
-        <div class="col-2">
-            <a href="#" class="btn btn-sm btn-primary">Add Activity</a>
-        </div>
+<div class="container solid-bg">
+    <div>
+        <h1>Activities</h1>
+        <a href="{{ url_for('add_activity') }}" class="btn btn-sm btn-success">Add Activity</a>
     </div>
     <div class="row row-cols-1 row-cols-md-3">
         {% for a in activities|sort %}
@@ -22,8 +18,6 @@
                         Total Attendance: <strong>{{ a.attendances|length }} </strong></br>
                         Most recent attendance: <strong>{{ a.attendances|sort(reverse = True)|first }}</strong>
                     </p>
-                    <!-- <a href="{{ url_for('edit_class', class_id=c.id) }}" class="btn btn-sm btn-warning">Update</a>
-                    <a href="{{ url_for('show_class', class_id=c.id) }}" class="btn btn-sm btn-info">View</a> -->
                 </div>
             </div>
         </div>

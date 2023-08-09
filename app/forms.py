@@ -61,17 +61,17 @@ class UpdateAccountForm(FlaskForm):
                     'That email is taken, please choose a different one.')
 
 
-# class ActivityForm(FlaskForm):
-#     name = StringField('Name', validators=[
-#                        DataRequired(), Length(min=3, max=20)])
-#     category = StringField('Category')
-#     submit = SubmitField('Submit')
+class ActivityForm(FlaskForm):
+    name = StringField('Name', validators=[
+                       DataRequired(), Length(min=3, max=20)])
+    category = StringField('Category')
+    submit = SubmitField('Submit')
 
-#     def validate_name(self, name):
-#         a = Activity.query.filter_by(name=name.data).first()
+    def validate_name(self, name):
+        a = Activity.query.filter_by(name=name.data).first()
 
-#         if a:
-#             raise ValidationError('Activities exists!')
+        if a:
+            raise ValidationError('Activities exists!')
 
 
 # class AttendanceForm(FlaskForm):

@@ -4,7 +4,7 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db
 from app.models import User, Activity, Attendance
-from app.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, ActivityForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 
@@ -148,7 +148,7 @@ DEV branches
 
 
 """
-Class related endpoints
+Activity related endpoints
 """
 
 
@@ -161,22 +161,24 @@ def activities():
 
 
 def capitalize_str(s):
+    # Helper Function
     return " ".join([x.capitalize() for x in s.split()])
 
 
-# @app.route('/new_class', methods=['GET', 'POST'])
-# def new_class():
-#     form = ClassForm()
+@app.route('/new_activity', methods=['GET', 'POST'])
+@login_required
+def add_activity():
+    form = ActivityForm()
 
-#     if form.validate_on_submit():
-#         c = Activity(name=capitalize_str(form.name.data),
-#                      class_type=capitalize_str(form.class_type.data))
-#         db.session.add(c)
-#         db.session.commit()
-#         flash('New class added!', 'success')
-#         return redirect(url_for('classes', title='Classes'))
+    if form.validate_on_submit():
+        a = Activity(name=capitalize_str(form.name.data),
+                     category=capitalize_str(form.class_type.data))
+        db.session.add(a)
+        db.session.commit()
+        flash('New activity added!', 'success')
+        return redirect(url_for('activities', title='Activities'))
 
-    return render_template('add_class.html', legend='New Class', form=form)
+    return render_template('add_activity.html', legend='New Activity', form=form)
 
 
 # @app.route('/class/<int:class_id>')
