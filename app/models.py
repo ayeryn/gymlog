@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
         return f"User('{self.username}', '{self.email}', '{self.avatar_file}')"
 
     def set_password(self, password):
-        self.password_hash = bcrypt.generate_password_hash(
+        self.password = bcrypt.generate_password_hash(
             password).decode('utf-8')
 
     def check_password(self, password):
