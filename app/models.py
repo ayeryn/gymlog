@@ -32,12 +32,14 @@ class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(25), unique=True, nullable=False)
     category = db.Column(db.String(15), nullable=False)
+    modified_time = db.Column(
+        db.DateTime, nullable=False, onupdate=datetime.utcnow)
     attendances = db.Relationship('Attendance', backref='activity', lazy=True)
 
     def __repr__(self):
         return f"Activity('{self.name}', '{self.category}')"
 
-        # Make object sortable by name
+    # Make object sortable by name
     def __lt__(self, other):
         return self.name < other.name
 

@@ -172,7 +172,7 @@ def add_activity():
 
     if form.validate_on_submit():
         a = Activity(name=capitalize_str(form.name.data),
-                     category=capitalize_str(form.class_type.data))
+                     category=capitalize_str(form.category.data))
         db.session.add(a)
         db.session.commit()
         flash('New activity added!', 'success')
@@ -194,14 +194,14 @@ def add_activity():
 
 #     if c and form.validate_on_submit():
 #         c.name = capitalize_str(form.name.data)
-#         c.class_type = form.class_type.data
+#         c.category = form.category.data
 #         db.session.add(c)
 #         db.session.commit()
 #         flash('Class updated!', 'success')
 
 #     elif request.method == 'GET':
 #         form.name.data = c.name
-#         form.class_type.data = c.class_type
+#         form.category.data = c.category
 #         return render_template('add_class.html', legend='Update class', form=form)
 
     # return redirect(url_for('classes'))
