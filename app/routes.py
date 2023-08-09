@@ -107,44 +107,44 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
+
 """
 DEV branches
 """
 
-def format_day(html, day, style_class='cal-text-attend'):
-    pat = f'class="[a-z]+">{day.day}<'
-    s_ind, e_ind = search(pat, html).span()
-    weekday = day.strftime('%a').lower()
-    if day == date.today():
-        rs = f'class="{weekday} {style_class} cal-today">{day.day}<'
-    else:
-        rs = f'class="{weekday} {style_class}">{day.day}<'
+# def format_day(html, day, style_class='cal-text-attend'):
+#     pat = f'class="[a-z]+">{day.day}<'
+#     s_ind, e_ind = search(pat, html).span()
+#     weekday = day.strftime('%a').lower()
+#     if day == date.today():
+#         rs = f'class="{weekday} {style_class} cal-today">{day.day}<'
+#     else:
+#         rs = f'class="{weekday} {style_class}">{day.day}<'
 
-    return html.replace(html[s_ind:e_ind], rs)
+#     return html.replace(html[s_ind:e_ind], rs)
 
 
-def format_month():
-    """
-    Add styling on top of HTMLCalendar format
-    - add cal-today to today's class
-    - add cal-text to the rest of the month
-    """
-    now = date.today()
-    cal = HTMLCalendar()
-    cal_html = cal.formatmonth(theyear=now.year, themonth=now.month)
+# def format_month():
+#     """
+#     Add styling on top of HTMLCalendar format
+#     - add cal-today to today's class
+#     - add cal-text to the rest of the month
+#     """
+#     now = date.today()
+#     cal = HTMLCalendar()
+#     cal_html = cal.formatmonth(theyear=now.year, themonth=now.month)
 
-    # Format days with workouts
-    curr_month_start = now.replace(day=1)
-    next_month_start = (curr_month_start + timedelta(days=32)).replace(day=1)
-    days_attended = db.session.query(Attendance).filter(
-        Attendance.date_attended >= curr_month_start, Attendance.date_attended < next_month_start)
+#     # Format days with workouts
+#     curr_month_start = now.replace(day=1)
+#     next_month_start = (curr_month_start + timedelta(days=32)).replace(day=1)
+#     days_attended = db.session.query(Attendance).filter(
+#         Attendance.date_attended >= curr_month_start, Attendance.date_attended < next_month_start)
 
-    for d in days_attended:
-        print(f'd.date_attended = {d.date_attended}')
-        cal_html = format_day(cal_html, d.date_attended)
+#     for d in days_attended:
+#         print(f'd.date_attended = {d.date_attended}')
+#         cal_html = format_day(cal_html, d.date_attended)
 
-    return cal_html
-
+#     return cal_html
 
 
 """
@@ -152,74 +152,74 @@ Class related endpoints
 """
 
 
-@app.route('/classes')
-def classes():
+@app.route('/activities')
+def activities():
     page = request.args.get('page', 1, type=int)
-    gym_classes = GymClass.query.order_by(
-        GymClass.name).paginate(page=page, per_page=9)
-    return render_template('classes.html', title='Classes', gym_classes=gym_classes)
+    activities = Activity.query.order_by(
+        Activity.name).paginate(page=page, per_page=9)
+    return render_template('activities.html', title='Activities', activities=activities)
 
 
 def capitalize_str(s):
     return " ".join([x.capitalize() for x in s.split()])
 
 
-@app.route('/new_class', methods=['GET', 'POST'])
-def new_class():
-    form = ClassForm()
+# @app.route('/new_class', methods=['GET', 'POST'])
+# def new_class():
+#     form = ClassForm()
 
-    if form.validate_on_submit():
-        c = GymClass(name=capitalize_str(form.name.data),
-                     class_type=capitalize_str(form.class_type.data))
-        db.session.add(c)
-        db.session.commit()
-        flash('New class added!', 'success')
-        return redirect(url_for('classes', title='Classes'))
+#     if form.validate_on_submit():
+#         c = Activity(name=capitalize_str(form.name.data),
+#                      class_type=capitalize_str(form.class_type.data))
+#         db.session.add(c)
+#         db.session.commit()
+#         flash('New class added!', 'success')
+#         return redirect(url_for('classes', title='Classes'))
 
     return render_template('add_class.html', legend='New Class', form=form)
 
 
-@app.route('/class/<int:class_id>')
-def show_class(class_id):
-    c = GymClass.query.get(class_id)
-    return render_template('class.html', legend=c.name, gymclass=c)
+# @app.route('/class/<int:class_id>')
+# def show_class(class_id):
+#     c = Activity.query.get(class_id)
+#     return render_template('class.html', legend=c.name, gymclass=c)
 
 
-@app.route('/class/<int:class_id>/update', methods=['GET', 'POST'])
-def edit_class(class_id):
-    c = GymClass.query.get(class_id)
-    form = ClassForm()
+# @app.route('/class/<int:class_id>/update', methods=['GET', 'POST'])
+# def edit_class(class_id):
+#     c = Activity.query.get(class_id)
+#     form = ClassForm()
 
-    if c and form.validate_on_submit():
-        c.name = capitalize_str(form.name.data)
-        c.class_type = form.class_type.data
-        db.session.add(c)
-        db.session.commit()
-        flash('Class updated!', 'success')
+#     if c and form.validate_on_submit():
+#         c.name = capitalize_str(form.name.data)
+#         c.class_type = form.class_type.data
+#         db.session.add(c)
+#         db.session.commit()
+#         flash('Class updated!', 'success')
 
-    elif request.method == 'GET':
-        form.name.data = c.name
-        form.class_type.data = c.class_type
-        return render_template('add_class.html', legend='Update class', form=form)
+#     elif request.method == 'GET':
+#         form.name.data = c.name
+#         form.class_type.data = c.class_type
+#         return render_template('add_class.html', legend='Update class', form=form)
 
-    return redirect(url_for('classes'))
+    # return redirect(url_for('classes'))
 
 
-@app.route('/class/<int:class_id>/delete', methods=['POST'])
-def delete_class(class_id):
-    c = GymClass.query.get(class_id)
-    class_name = c.name
+# @app.route('/class/<int:class_id>/delete', methods=['POST'])
+# def delete_class(class_id):
+#     c = Activity.query.get(class_id)
+#     class_name = c.name
 
-    db.session.delete(c)
-    db.session.commit()
-    flash(f'{class_name} has been deleted!', 'success')
+#     db.session.delete(c)
+#     db.session.commit()
+#     flash(f'{class_name} has been deleted!', 'success')
 
-    return redirect(url_for('classes'))
+#     return redirect(url_for('classes'))
 
 
 """
 Attendance related endpoints
-"""
+
 
 
 @app.route('/attendances')
@@ -234,7 +234,7 @@ def attendances():
 def new_attendance():
     form = AttendanceForm()
     form.class_id.choices = [(c.id, c.name)
-                             for c in GymClass.query.all()]
+                             for c in Activity.query.all()]
 
     if form.validate_on_submit():
         a = Attendance(class_id=form.class_id.data,
@@ -274,11 +274,11 @@ def delete_attendance(attendance_id):
     flash(f'Attendance has been deleted!', 'success')
 
     return redirect(url_for('attendances'))
-
+"""
 
 """
 CSV loader
-"""
+
 ALLOWED_EXTENTIONS = set(['.csv'])
 
 
@@ -307,10 +307,10 @@ def upload_csv():
             for row in csv_reader:
                 class_name, date = process_csv_row(row, f_name)
 
-                # Add GymClass if class doesn't exists
-                c = GymClass.query.filter_by(name=class_name).first()
+                # Add Activity if class doesn't exists
+                c = Activity.query.filter_by(name=class_name).first()
                 if not c:
-                    c = GymClass(name=class_name)
+                    c = Activity(name=class_name)
                     db.session.add(c)
                     db.session.commit()
                     flash(f'Class {class_name} created from csv', 'success')
@@ -323,3 +323,5 @@ def upload_csv():
         return redirect(url_for('classes'))
 
     return render_template('upload.html', title="Upload CSV")
+
+    """

@@ -31,11 +31,15 @@ class User(db.Model, UserMixin):
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(25), unique=True, nullable=False)
-    category = db.Column(db.String(15), unique=True, nullable=False)
+    category = db.Column(db.String(15), nullable=False)
     attendances = db.Relationship('Attendance', backref='activity', lazy=True)
 
     def __repr__(self):
         return f"Activity('{self.name}', '{self.category}')"
+
+        # Make object sortable by name
+    def __lt__(self, other):
+        return self.name < other.name
 
 
 class Attendance(db.Model):
@@ -51,20 +55,3 @@ class Attendance(db.Model):
         # TODO:
         # Add act name and user name
         return f"Attendance('{self.date_attended}')"
-
-
-class GymClass(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), unique=True, nullable=False)
-    class_type = db.Column(db.String(3), default='Workout')
-    attendance_list = db.relationship(
-        'Attendance', backref='class_taken', lazy=True)
-
-    def __repr__(self) -> str:
-        return f'Class({self.name}, {self.class_type})'
-
-    # Make object sortable by name
-    def __lt__(self, other):
-        return self.name < other.name
-
-

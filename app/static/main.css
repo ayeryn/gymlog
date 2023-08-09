@@ -31,7 +31,7 @@ header {
 }
 
 main {
-    background-image: url(bg.jpg);
+    /* background-image: url(bg.jpg); */
     height: 90%;
     background-position: center;
     /* Center the image */
