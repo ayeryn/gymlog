@@ -165,6 +165,12 @@ def capitalize_str(s):
     return " ".join([x.capitalize() for x in s.split()])
 
 
+# @app.route('/activity/<int:activity_id>')
+# def activity(activity_id):
+#     a = Activity.query.get(activity_id)
+#     return render_template('activity.html', legend=a.name, activity=a)
+
+
 @app.route('/new_activity', methods=['GET', 'POST'])
 @login_required
 def add_activity():
@@ -181,42 +187,37 @@ def add_activity():
     return render_template('add_activity.html', legend='New Activity', form=form)
 
 
-# @app.route('/class/<int:class_id>')
-# def show_class(class_id):
-#     c = Activity.query.get(class_id)
-#     return render_template('class.html', legend=c.name, gymclass=c)
+@app.route('/class/<int:activity_id>', methods=['GET', 'POST'])
+@login_required
+def activity(activity_id):
+    act = Activity.query.get(activity_id)
+    form = ActivityForm()
+
+    if act and form.validate_on_submit():
+        act.name = capitalize_str(form.name.data)
+        db.session.add(act)
+        db.session.commit()
+        flash('Activity updated!', 'success')
+
+    elif request.method == 'GET':
+        form.name.data = act.name
+        form.category.data = act.category
+        return render_template('add_activity.html', legend='Update activity', form=form)
+
+    return redirect(url_for('activities'))
 
 
-# @app.route('/class/<int:class_id>/update', methods=['GET', 'POST'])
-# def edit_class(class_id):
-#     c = Activity.query.get(class_id)
-#     form = ClassForm()
+@app.route('/activity/<int:activity_id>/delete', methods=['POST'])
+@login_required
+def delete_activity(activity_id):
+    act = Activity.query.get(activity_id)
+    act_name = act.name
 
-#     if c and form.validate_on_submit():
-#         c.name = capitalize_str(form.name.data)
-#         c.category = form.category.data
-#         db.session.add(c)
-#         db.session.commit()
-#         flash('Class updated!', 'success')
+    db.session.delete(act)
+    db.session.commit()
+    flash(f'{act_name} has been deleted!', 'success')
 
-#     elif request.method == 'GET':
-#         form.name.data = c.name
-#         form.category.data = c.category
-#         return render_template('add_class.html', legend='Update class', form=form)
-
-    # return redirect(url_for('classes'))
-
-
-# @app.route('/class/<int:class_id>/delete', methods=['POST'])
-# def delete_class(class_id):
-#     c = Activity.query.get(class_id)
-#     class_name = c.name
-
-#     db.session.delete(c)
-#     db.session.commit()
-#     flash(f'{class_name} has been deleted!', 'success')
-
-#     return redirect(url_for('classes'))
+    return redirect(url_for('activities'))
 
 
 """
