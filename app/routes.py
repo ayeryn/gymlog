@@ -4,7 +4,7 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db
 from app.models import User, Activity, Attendance
-from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, ActivityForm
+from app.forms import RegistrationForm, LoginForm, ResetPasswordRequestForm, UpdateAccountForm, ActivityForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 
@@ -52,6 +52,21 @@ def login():
         flash('Invalid email or password')
         return redirect(url_for('login'))
     return render_template('login.html', title='Login', form=form)
+
+
+@app.route("/password_reset", methods=["GET", "POST"])
+def reset_password_request():
+    form = ResetPasswordRequestForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            # TODO: send out email
+            return redirect(url_for('home'))
+    return render_template(
+        'reset_password_request.html',
+        title='Request Password Reset',
+        form=form)
 
 
 @app.route('/logout')
