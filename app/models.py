@@ -1,0 +1,77 @@
+from datetime import datetime, timedelta
+from flask_login import UserMixin
+from app import db, bcrypt, login, app
+import jwt
+
+
+@login.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(25), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    avatar_file = db.Column(
+        db.String(20), nullable=False, default="default.jpg")
+    password = db.Column(db.String(60))
+    attendances = db.Relationship('Attendance', backref='user', lazy=True)
+
+    def __repr__(self):
+        return f"User('{self.username}', '{self.email}', '{self.avatar_file}')"
+
+    def set_password(self, password):
+        self.password = bcrypt.generate_password_hash(
+            password).decode('utf-8')
+
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password, password)
+
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode(
+            {'reset_password': self.id,
+             'exp': datetime.now() + timedelta(seconds=expires_in)
+             },
+            app.config['SECRET_KEY'],
+            algorithm='HS256')
+
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token,
+                            app.config['SECRET_KEY'], algorithms='HS256')['reset_password']
+        except:
+            return
+        return User.query.get(id)
+
+
+class Activity(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(25), unique=True, nullable=False)
+    category = db.Column(db.String(15), nullable=False)
+    modified_time = db.Column(
+        db.DateTime, nullable=False, onupdate=datetime.utcnow)
+    attendances = db.Relationship('Attendance', backref='activity', lazy=True)
+
+    def __repr__(self):
+        return f"Activity('{self.name}', '{self.category}')"
+
+    # Make object sortable by name
+    def __lt__(self, other):
+        return self.name < other.name
+
+
+class Attendance(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    activity_id = db.Column(db.Integer, db.ForeignKey(
+        'activity.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'user.id'), nullable=False)
+    date_attended = db.Column(
+        db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        # TODO:
+        # Add act name and user name
+        return f"Attendance('{self.date_attended}')"

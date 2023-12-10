@@ -4,11 +4,12 @@
     <article class="media content-section">
         <div class="row align-items-baseline m-10">
             <div class="col-5">
-                <h2 class="article-title">{{ gymclass.name }}</h2>
+                <h2>{{ gymclass.name }}</h2>
             </div>
             <div class="col-3">
                 <p class="text-muted">Type: {{ gymclass.class_type}}</p>
             </div>
+            <h4 class="article-title">Attendance History:</h4>
             {% for a in gymclass.attendance_list|sort %}
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">{{ a.date_attended.strftime('%Y-%m-%d') }}</li>

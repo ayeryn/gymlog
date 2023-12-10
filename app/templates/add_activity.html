@@ -19,16 +19,16 @@
                 {% endif %}
             </div>
             <div class="form-group">
-                {{ form.class_type.label(class="form-control-label") }}
-                {% if form.class_type.errors %}
-                {{ form.class_type(class="form-control from-crontrol-lg is-invalid") }}
+                {{ form.category.label(class="form-control-label") }}
+                {% if form.category.errors %}
+                {{ form.category(class="form-control from-crontrol-lg is-invalid") }}
                 <div class="invalid-feeback">
-                    {% for error in form.class_type.errors %}
+                    {% for error in form.category.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.class_type(class="form-control from-crontrol-lg") }}
+                {{ form.category(class="form-control from-crontrol-lg") }}
                 {% endif %}
             </div>
         </fieldset>
