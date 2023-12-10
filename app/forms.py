@@ -7,15 +7,15 @@ from app.models import User, Activity, Attendance
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField("Username",
+    username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=25)])
-    email = StringField("Email",
+    email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    password = PasswordField("Password",
+    password = PasswordField('Password',
                              validators=[DataRequired()])
-    confirm_password = PasswordField("Confirm Password",
+    confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField("Sign Up")
+    submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
@@ -31,21 +31,36 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField("Email", validators=[DataRequired(), Email()])
-    password = PasswordField("Password", validators=[DataRequired()])
-    remember = BooleanField("Remember Me")
-    submit = SubmitField("Login")
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
 
 
 class ResetPasswordRequestForm(FlaskForm):
-    email = StringField("Email", validators=[DataRequired(), Email()])
-    submit = SubmitField("Request Password Reset Email")
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset Email')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError(
+                'That email is not associated with any account, \
+                 please try a different one or register.')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('New Password',
+                             validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password',
+                                     validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Reset Password')
 
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField("Username",
+    username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=25)])
-    email = StringField("Email",
+    email = StringField('Email',
                         validators=[DataRequired(), Email()])
     picture = FileField('Upload Profile Picture', validators=[
                         FileAllowed(['jpg', 'png'])])

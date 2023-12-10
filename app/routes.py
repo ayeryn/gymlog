@@ -3,24 +3,25 @@ import os
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db
-from app.models import User, Activity, Attendance
-from app.forms import RegistrationForm, LoginForm, ResetPasswordRequestForm, UpdateAccountForm, ActivityForm
+from app.models import User, Activity
+from app.forms import RegistrationForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm, UpdateAccountForm, ActivityForm
+from app.email import send_password_reset_email
 from flask_login import current_user, login_user, logout_user, login_required
 
 
-@app.route("/")
-@app.route("/home")
+@app.route('/')
+@app.route('/home')
 def home():
     activities = Activity.query.all()
-    return render_template("home.html", activities=activities)
+    return render_template('home.html', activities=activities)
 
 
-@app.route("/about")
+@app.route('/about')
 def about():
-    return render_template("about.html", title='About')
+    return render_template('about.html', title='About')
 
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -32,12 +33,12 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash("Your account has been created! You are now able to log in.", "success")
+        flash('Your account has been created! You are now able to log in.', 'success')
         return redirect(url_for('login'))
-    return render_template("register.html", title="Register", form=form)
+    return render_template('register.html', title='Register', form=form)
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -54,19 +55,42 @@ def login():
     return render_template('login.html', title='Login', form=form)
 
 
-@app.route("/password_reset", methods=["GET", "POST"])
+@app.route('/reset_password', methods=['GET', 'POST'])
 def reset_password_request():
-    form = ResetPasswordRequestForm()
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
 
+    form = ResetPasswordRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
-            # TODO: send out email
-            return redirect(url_for('home'))
+            send_password_reset_email(user)
+        flash('Check your email for instructions to reset your password')
+        return redirect(url_for('login'))
     return render_template(
         'reset_password_request.html',
-        title='Request Password Reset',
+        title='Reset Password Request',
         form=form)
+
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
+    user = User.verify_reset_password_token(token)
+    if user is None:
+        flash('That is an invalid or expired token', 'warning')
+        return redirect(url_for('reset_password_request'))
+
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('Your password has been reset!')
+        return redirect(url_for('login'))
+
+    return render_template('reset_password.html', title='Reset Password', form=form)
 
 
 @app.route('/logout')
@@ -76,7 +100,7 @@ def logout():
 
 
 def save_picture(form_picture):
-    """
+    '''
     Return picture_fn (string)
 
     1. picture_fn - generates a randomized filename by concatenating a random hex, 
@@ -84,7 +108,7 @@ def save_picture(form_picture):
     2. picture_path - generates the abs path of where to upload the file to
     3. resizes picture
     4. saves file at picture_path
-    """
+    '''
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
@@ -123,28 +147,28 @@ def account():
                            image_file=image_file, form=form)
 
 
-"""
+'''
 DEV branches
-"""
+'''
 
 # def format_day(html, day, style_class='cal-text-attend'):
-#     pat = f'class="[a-z]+">{day.day}<'
+#     pat = f'class='[a-z]+'>{day.day}<'
 #     s_ind, e_ind = search(pat, html).span()
 #     weekday = day.strftime('%a').lower()
 #     if day == date.today():
-#         rs = f'class="{weekday} {style_class} cal-today">{day.day}<'
+#         rs = f'class='{weekday} {style_class} cal-today'>{day.day}<'
 #     else:
-#         rs = f'class="{weekday} {style_class}">{day.day}<'
+#         rs = f'class='{weekday} {style_class}'>{day.day}<'
 
 #     return html.replace(html[s_ind:e_ind], rs)
 
 
 # def format_month():
-#     """
+#     '''
 #     Add styling on top of HTMLCalendar format
 #     - add cal-today to today's class
 #     - add cal-text to the rest of the month
-#     """
+#     '''
 #     now = date.today()
 #     cal = HTMLCalendar()
 #     cal_html = cal.formatmonth(theyear=now.year, themonth=now.month)
@@ -162,9 +186,9 @@ DEV branches
 #     return cal_html
 
 
-"""
+'''
 Activity related endpoints
-"""
+'''
 
 
 @app.route('/activities')
@@ -177,7 +201,7 @@ def activities():
 
 def capitalize_str(s):
     # Helper Function
-    return " ".join([x.capitalize() for x in s.split()])
+    return ' '.join([x.capitalize() for x in s.split()])
 
 
 # @app.route('/activity/<int:activity_id>')
@@ -235,7 +259,7 @@ def delete_activity(activity_id):
     return redirect(url_for('activities'))
 
 
-"""
+'''
 Attendance related endpoints
 
 
@@ -292,9 +316,9 @@ def delete_attendance(attendance_id):
     flash(f'Attendance has been deleted!', 'success')
 
     return redirect(url_for('attendances'))
-"""
+'''
 
-"""
+'''
 CSV loader
 
 ALLOWED_EXTENTIONS = set(['.csv'])
@@ -340,6 +364,6 @@ def upload_csv():
 
         return redirect(url_for('classes'))
 
-    return render_template('upload.html', title="Upload CSV")
+    return render_template('upload.html', title='Upload CSV')
 
-    """
+    '''

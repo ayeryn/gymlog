@@ -19,6 +19,8 @@ bcrypt = Bcrypt(app)
 login = LoginManager(app)
 login.login_view = 'login'
 login.login_message_category = 'info'
+# print(app.config['MAIL_USERNAME'])
+# print(app.config['MAIL_PASSWORD'])
 
 mail = Mail(app)
 
@@ -34,8 +36,7 @@ if not app.debug:
         if app.config['MAIL_USE_TLS']:
             secure = ()
         mail_handler = SMTPHandler(
-            mailhost=
-            (app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+            mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
             fromaddr='no-reply@' + app.config['MAIL_SERVER'],
             toaddrs=app.config['ADMINS'], subject='Gymlog Failure',
             credentials=auth, secure=secure
@@ -45,5 +46,5 @@ if not app.debug:
         # and not warning/debugging msgs/etc.
         mail_handler.setLevel(logging.ERROR)
 
-        # Attach handler to the Flask loger
+        # Attach handler to the Flask logger
         app.logger.addHandler(mail_handler)
