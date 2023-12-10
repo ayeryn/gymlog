@@ -1,6 +1,14 @@
+:root {
+    --pink: #f9cdff;
+    --litelime: #A1E8A1;
+    --litepink: #fce6ff;
+    --lime: #32CD32;
+}
+
 body {
     /* background: #89cff0; */
-    background: #cdebf9;
+    /* background: #FD841F; */
+    background-color: var(--litelime);
     color: #333333;
     height: 100vh;
 }
@@ -11,21 +19,15 @@ h3,
 h4,
 h5,
 h6 {
-    color: #FD841F;
+    color: black;
+}
+
+main {
+    /* background-color: black; */
 }
 
 header {
     height: 7%;
-}
-
-main {
-    background-image: url(bg.jpg);
-    height: 90%;
-    background-position: center;
-    /* Center the image */
-    background-repeat: no-repeat;
-    /* Do not repeat the image */
-    background-size: cover;
 }
 
 hr {
@@ -53,7 +55,9 @@ a.site-link:hover {
 }
 
 .site-nav-bg {
-    background-color: #89cff0;
+    /* background-color: #89cff0; */
+    background-color: var(--pink);
+    ;
 }
 
 .navbar-brand {
@@ -135,9 +139,4 @@ a.article-title:hover {
 
 .cal-text-attend {
     font-weight: bold;
-}
-
-.sat {
-    /* font-weight: bold; */
-    /* margin-right: 10; */
 }
