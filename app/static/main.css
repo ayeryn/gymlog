@@ -9,6 +9,8 @@
     --text-color: #32CD32;
     /* --navbar-color: #ffb38a; */
     --navbar-color: #A1E8A1;
+    --typewriter-speed: 2s;
+    --typewriter-chars: 17;
 }
 
 /* TODO: use another font face */
@@ -19,8 +21,6 @@
 }
 
 body {
-    /* background: #89cff0; */
-    /* background: #FD841F; */
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
@@ -49,6 +49,58 @@ main {
     height: 95vh;
 }
 
+.welcome {
+    position: relative;
+}
+
+.welcome::before,
+.welcome::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.welcome::before {
+    background-color: var(--bg-color);
+    animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards;
+}
+
+.welcome::after {
+    width: 0.125em;
+    background-color: var(--text-color);
+    animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards
+}
+
+@keyframes typewriter {
+    to {
+        left: 100%;
+    }
+}
+
+@keyframes blink {
+    to {
+        background-color: transparent;
+    }
+}
+
+.quote {
+    opacity: 0;
+    transform: translateY(3rem);
+    animation: fadeInUp 2s ease calc(var(--typewriter-speed) + 2s) forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
 hr {
     color: #006dd3;
 }
@@ -74,9 +126,7 @@ a.site-link:hover {
 }
 
 .site-nav-bg {
-    /* background-color: #89cff0; */
     background-color: var(--navbar-color);
-    ;
 }
 
 .navbar-brand {

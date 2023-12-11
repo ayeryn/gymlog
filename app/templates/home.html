@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Welcome to Gym Report</h1>
-<p>{{quote}}</p>
-<p>{{author}}</p>
+<div>
+    <h1 class="welcome">Welcome to GymLog</h1>
+    <p class="quote">{{quote}}<br>
+        - {{author}}</p>
+</div>
 {% endblock content %}
