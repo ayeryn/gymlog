@@ -26,18 +26,23 @@
     </div>
     {% endfor %}
 </div>
-<div class="row align-items-center">
-    {% for page_num in gym_classes.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-    {% if page_num %}
-    {% if gym_classes.page == page_num %}
-    <a class="btn btn-current mb-4" href="{{ url_for('classes', page=page_num) }}">{{ page_num }}</a>
-    {% else %}
-    <a class="btn btn-other mb-4" href="{{ url_for('classes', page=page_num) }}">{{ page_num }}</a>
-    {% endif %}
-    {% else %}
-    ...
-    {% endif %}
-    {% endfor %}
-</div>
-</div>
+<nav>
+    <ul class="pagination justify-content-center">
+        {% for page_num in gym_classes.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        {% if gym_classes.page == page_num %}
+        <li class="page-item">
+            <a class="btn btn-current mb-4" href="{{ url_for('classes', page=page_num) }}">{{ page_num }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="btn btn-other mb-4" href="{{ url_for('classes', page=page_num) }}">{{ page_num }}</a>
+        </li>
+        {% endif %}
+        {% else %}
+        ...
+        {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
 {% endblock content %}
