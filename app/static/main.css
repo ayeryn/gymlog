@@ -206,11 +206,11 @@ a.article-title:hover {
 
 .btn-other {
     background-color: transparent;
-    border-color: var(--secondary-color);
     color: var(--secondary-color)
 }
 
 .btn-other:hover {
+    border-color: var(--secondary-color);
     color: white;
 }
 
