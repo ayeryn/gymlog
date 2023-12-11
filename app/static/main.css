@@ -192,8 +192,9 @@ a.article-title:hover {
     font-size: 2.5rem;
 }
 
-.card {
+.content {
     background-color: var(--tertiary-color);
+    border-radius: 10px;
 }
 
 .card-subtitle {
