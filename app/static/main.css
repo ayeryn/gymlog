@@ -3,13 +3,18 @@
     --litelime: #A1E8A1;
     --litepink: #fce6ff;
     --lime: #32CD32;
+    /* --bg-color: blanchedalmond; */
+    --bg-color: black;
+    /* --text-color: #002eff; */
+    --text-color: orange;
+    --navbar-color: #ffb38a;
 }
 
 body {
     /* background: #89cff0; */
     /* background: #FD841F; */
-    background-color: var(--litelime);
-    color: #333333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     height: 100vh;
 }
 
@@ -19,12 +24,9 @@ h3,
 h4,
 h5,
 h6 {
-    color: black;
+    color: var(--text-color);
 }
 
-main {
-    /* background-color: black; */
-}
 
 header {
     height: 7%;
@@ -56,7 +58,7 @@ a.site-link:hover {
 
 .site-nav-bg {
     /* background-color: #89cff0; */
-    background-color: var(--pink);
+    background-color: var(--navbar-color);
     ;
 }
 
