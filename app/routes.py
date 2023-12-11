@@ -1,19 +1,28 @@
 import secrets
 import os
-from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
-from app import app, db
-from app.models import User, Activity
-from app.forms import RegistrationForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm, UpdateAccountForm, ActivityForm
-from app.email import send_password_reset_email
-from flask_login import current_user, login_user, logout_user, login_required
+from io import TextIOWrapper
+from datetime import date, timedelta
+from calendar import HTMLCalendar
+import csv
+from re import search
+import requests
+import json
+
+
+def get_quote():
+    r = requests.get(
+        "https://api.quotable.io/quotes/random?tags=motivational|failure")
+    data = json.loads(r.content)
+    quote_dict = data[0]
+    return quote_dict['content'], quote_dict['author']
 
 
 @app.route('/')
 @app.route('/home')
 def home():
-    activities = Activity.query.all()
-    return render_template('home.html', activities=activities)
+
+    quote, author = get_quote()
+    return render_template('home.html', quote=quote, author=author)
 
 
 @app.route('/about')

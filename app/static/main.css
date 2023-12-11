@@ -1,44 +1,101 @@
-/* Color Vars */
 :root {
-    --lime: #7CDF7C;
     --pink: #f9cdff;
-    --litelime: #A1E8A1;
     --litepink: #fce6ff;
-    --lime: #32CD32;
+    --bg-color: black;
+    --primary-color: #32CD32;
+    --secondary-color: #A1E8A1;
+    --tertiary-color: #5e5e5e;
+    /* --tertiary-color: #c1f0c1; */
+    --typewriter-speed: 2s;
+    --typewriter-chars: 17;
+}
 
+/* TODO: use another font face */
+@font-face {
+    font-family: 'Fira Code';
+    src: url('fonts/FiraCode-Regular.woff2');
+    font-weight: bold;
 }
 
 body {
-    /* background: #cdebf9; */
-    color: #333333;
-    height: 100vh;
-    background: repeating-linear-gradient(45deg,
-            var(--litelime),
-            var(--pink) 55px)
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Fira Code';
 }
 
 h1,
 h2,
 h3,
-h4,
-h5,
-h6 {
-    color: var(--lime);
+h4 {
+    color: var(--primary-color);
 }
 
+
+
+
 header {
-    height: 7%;
+    height: 5vh;
 }
 
 main {
-    /* background-image: url(bg.jpg); */
-    height: 90%;
-    background-position: center;
-    /* Center the image */
-    background-repeat: no-repeat;
-    /* Do not repeat the image */
-    background-size: cover;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    height: 95vh;
 }
+
+.welcome {
+    position: relative;
+}
+
+.welcome::before,
+.welcome::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.welcome::before {
+    background-color: var(--bg-color);
+    animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards;
+}
+
+.welcome::after {
+    width: 0.125em;
+    background-color: var(--primary-color);
+    animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards
+}
+
+@keyframes typewriter {
+    to {
+        left: 100%;
+    }
+}
+
+@keyframes blink {
+    to {
+        background-color: transparent;
+    }
+}
+
+.quote {
+    opacity: 0;
+    transform: translateY(3rem);
+    animation: fadeInUp 2s ease calc(var(--typewriter-speed) + 2s) forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 hr {
     color: #006dd3;
@@ -48,16 +105,24 @@ hr {
     color: #3A1078;
 }
 
-.solid-bg {
-    background-color: var(--litelime);
-}
-
 .nav-text {
     color: pink;
 }
 
-.navbar_brand {
-    color: black
+.site-link {
+    color: #00008B;
+}
+
+a.site-link:hover {
+    color: #FD841F;
+}
+
+.site-nav-bg {
+    background-color: var(--secondary-color);
+}
+
+.navbar-brand {
+    color: #3A1078;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -127,19 +192,37 @@ a.article-title:hover {
     font-size: 2.5rem;
 }
 
-/* calendar styling */
-.cal-today {
-    color: #FD841F;
-    text-decoration: underline;
+.content {
+    background-color: var(--tertiary-color);
+    border-radius: 10px;
 }
 
-.cal-text-attend {
-    font-weight: bold;
+.card-subtitle {
+    color: white;
 }
 
-.sat {
-    /* font-weight: bold; */
-    /* margin-right: 10; */
+.btn-current {
+    background-color: var(--secondary-color);
+}
+
+.btn-other {
+    background-color: transparent;
+    color: var(--secondary-color)
+}
+
+.btn-other:hover {
+    border-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-add {
+    background-color: transparent;
+    border-color: var(--primary-color);
+    color: var(--primary-color)
+}
+
+.btn-add:hover {
+    color: white;
 }
 
 .btn-update {
