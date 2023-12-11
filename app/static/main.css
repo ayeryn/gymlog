@@ -209,3 +209,17 @@ a.article-title:hover {
     border-color: var(--secondary-color);
     color: var(--secondary-color)
 }
+
+.btn-other:hover {
+    color: white;
+}
+
+.btn-add {
+    background-color: transparent;
+    border-color: var(--primary-color);
+    color: var(--primary-color)
+}
+
+.btn-add:hover {
+    color: white;
+}
