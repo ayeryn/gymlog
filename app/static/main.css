@@ -1,14 +1,11 @@
 :root {
     --pink: #f9cdff;
-    --litelime: #A1E8A1;
     --litepink: #fce6ff;
-    --lime: #32CD32;
-    /* --bg-color: blanchedalmond; */
     --bg-color: black;
-    /* --text-color: #002eff; */
-    --text-color: #32CD32;
-    /* --navbar-color: #ffb38a; */
-    --navbar-color: #A1E8A1;
+    --primary-color: #32CD32;
+    --secondary-color: #A1E8A1;
+    --tertiary-color: #5e5e5e;
+    /* --tertiary-color: #c1f0c1; */
     --typewriter-speed: 2s;
     --typewriter-chars: 17;
 }
@@ -22,7 +19,7 @@
 
 body {
     background-color: var(--bg-color);
-    color: var(--text-color);
+    color: var(--primary-color);
     margin: 0;
     min-height: 100vh;
     font-family: 'Fira Code';
@@ -31,11 +28,11 @@ body {
 h1,
 h2,
 h3,
-h4,
-h5,
-h6 {
-    color: var(--text-color);
+h4 {
+    color: var(--primary-color);
 }
+
+
 
 
 header {
@@ -70,7 +67,7 @@ main {
 
 .welcome::after {
     width: 0.125em;
-    background-color: var(--text-color);
+    background-color: var(--primary-color);
     animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards
 }
 
@@ -100,17 +97,12 @@ main {
 }
 
 
-
 hr {
     color: #006dd3;
 }
 
 .header-text:hover {
     color: #3A1078;
-}
-
-.solid-bg {
-    background-color: #cdebf9;
 }
 
 .nav-text {
@@ -126,7 +118,7 @@ a.site-link:hover {
 }
 
 .site-nav-bg {
-    background-color: var(--navbar-color);
+    background-color: var(--secondary-color);
 }
 
 .navbar-brand {
@@ -200,12 +192,20 @@ a.article-title:hover {
     font-size: 2.5rem;
 }
 
-/* calendar styling */
-.cal-today {
-    color: #FD841F;
-    text-decoration: underline;
+.card {
+    background-color: var(--tertiary-color);
 }
 
-.cal-text-attend {
-    font-weight: bold;
+.card-subtitle {
+    color: white;
+}
+
+.btn-current {
+    background-color: var(--secondary-color);
+}
+
+.btn-other {
+    background-color: transparent;
+    border-color: var(--secondary-color);
+    color: var(--secondary-color)
 }

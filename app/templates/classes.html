@@ -1,13 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container-fluid solid-bg">
-    <div class="row align-items-center">
-        <div class="col-2">
-            <h1>Classes</h1>
-        </div>
-        <div class="col-2">
-            <a href="{{ url_for('new_class') }}" class="btn btn-sm btn-primary">Add Class</a>
-        </div>
+<div class="row align-items-center">
+    <div class="col-2">
+        <h1>Classes</h1>
+    </div>
+    <div class="col-2">
+        <a href="{{ url_for('new_class') }}" class="btn btn-sm btn-current">Add Class</a>
     </div>
     <div class="row row-cols-1 row-cols-md-3">
         {% for c in gym_classes|sort %}
@@ -17,7 +15,7 @@
                     <h4 class="card-title">
                         {{ c.name }}
                     </h4>
-                    <p class="card-subtitle mb-2 text-muted">{{ c.class_type }}</p>
+                    <p class="card-subtitle mb-2">{{ c.class_type }}</p>
                     <p class="card-text">
                         Total Attendance: <strong>{{ c.attendance_list|length }} </strong></br>
                         Most recent attendance: <strong>{{ c.attendance_list|sort(reverse = True)|first }}</strong>
@@ -29,16 +27,18 @@
         </div>
         {% endfor %}
     </div>
-    {% for page_num in gym_classes.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-    {% if page_num %}
-    {% if gym_classes.page == page_num %}
-    <a class="btn btn-info mb-4" href="{{ url_for('classes', page=page_num) }}">{{ page_num }}</a>
-    {% else %}
-    <a class="btn btn-outline-info mb-4" href="{{ url_for('classes', page=page_num) }}">{{ page_num }}</a>
-    {% endif %}
-    {% else %}
-    ...
-    {% endif %}
-    {% endfor %}
+    <div class="row align-items-center">
+        {% for page_num in gym_classes.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        {% if gym_classes.page == page_num %}
+        <a class="btn btn-current mb-4" href="{{ url_for('classes', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+        <a class="btn btn-other mb-4" href="{{ url_for('classes', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+        {% else %}
+        ...
+        {% endif %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}
