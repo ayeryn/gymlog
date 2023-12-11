@@ -32,9 +32,6 @@ h4 {
     color: var(--primary-color);
 }
 
-
-
-
 header {
     height: 5vh;
 }
@@ -48,6 +45,8 @@ main {
 
 .welcome {
     position: relative;
+    /* FIXME: cursor starting/end position incorrect
+     width: max-content; */
 }
 
 .welcome::before,
@@ -68,7 +67,9 @@ main {
 .welcome::after {
     width: 0.125em;
     background-color: var(--primary-color);
-    animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards
+    animation:
+        typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards,
+        blink 750ms steps(var(--typewriter-chars)) infinite;
 }
 
 @keyframes typewriter {
