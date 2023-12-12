@@ -204,3 +204,19 @@ def upload_csv():
         return redirect(url_for('classes'))
 
     return render_template('upload.html', title="Upload CSV")
+
+
+"""
+Reporting
+"""
+
+
+@app.route("/monthly_report")
+def monthly_report():
+    data = []
+    for i in range(10):
+        data.append((f'class_0{i}', i % 3 + 5))
+
+    labels = [row[0] for row in data]
+    values = [row[1] for row in data]
+    return render_template('monthly_report.html', labels=labels, values=values)
