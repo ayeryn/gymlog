@@ -1,11 +1,7 @@
 :root {
-    --pink: #f9cdff;
-    --litepink: #fce6ff;
-    --bg-color: black;
-    --primary-color: #32CD32;
-    --secondary-color: #A1E8A1;
-    --tertiary-color: #5e5e5e;
-    /* --tertiary-color: #c1f0c1; */
+    --primary-color: black;
+    --secondary-color: white;
+    --accent-color: #32cd32;
     --typewriter-speed: 2s;
     --typewriter-chars: 17;
 }
@@ -18,8 +14,8 @@
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
     margin: 0;
     min-height: 100vh;
     font-family: 'Fira Code';
@@ -29,7 +25,7 @@ h1,
 h2,
 h3,
 h4 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 header {
@@ -60,13 +56,13 @@ main {
 }
 
 .welcome::before {
-    background-color: var(--bg-color);
+    background-color: var(--primary-color);
     animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards;
 }
 
 .welcome::after {
     width: 0.125em;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     animation:
         typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards,
         blink 750ms steps(var(--typewriter-chars)) infinite;
@@ -119,7 +115,7 @@ a.site-link:hover {
 }
 
 .site-nav-bg {
-    background-color: var(--secondary-color);
+    background-color: var(--accent-color);
 }
 
 .navbar-brand {
@@ -203,23 +199,23 @@ a.article-title:hover {
 }
 
 .btn-current {
-    background-color: var(--secondary-color);
+    background-color: var(--accent-color);
 }
 
 .btn-other {
     background-color: transparent;
-    color: var(--secondary-color)
+    color: var(--accent-color)
 }
 
 .btn-other:hover {
-    border-color: var(--secondary-color);
+    border-color: var(--accent-color);
     color: white;
 }
 
 .btn-add {
     background-color: transparent;
-    border-color: var(--primary-color);
-    color: var(--primary-color)
+    border-color: var(--secondary-color);
+    color: var(--secondary-color)
 }
 
 .btn-add:hover {
