@@ -51,11 +51,11 @@ header {
     height: 5vh;
 }
 
-#modeIcon {
+#lightModeToggle {
     cursor: pointer;
 }
 
-#modeIcon:hover {
+#lightModeToggle:hover {
     color: var(--accent-color);
 }
 
