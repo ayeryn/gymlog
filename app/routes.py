@@ -23,7 +23,6 @@ def get_quote():
 @app.route('/')
 @app.route('/home')
 def home():
-
     quote, author = get_quote()
     return render_template('home.html', quote=quote, author=author)
 
@@ -213,6 +212,9 @@ Reporting
 
 @app.route("/monthly_report")
 def monthly_report():
+    # TODO: Upload some mock data for current month
+    # TODO: Query data for the report
+    # TODO: able to grab current month's datas
     data = []
     for i in range(10):
         data.append((f'class_0{i}', i % 3 + 5))
