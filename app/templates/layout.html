@@ -85,21 +85,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var modeIcon = document.getElementById('modeIcon');
-            modeIcon.onclick = function () {
-                document.body.classList.toggle("light-theme")
-            };
-
-            // Add a click event listener to the element
-            modeIcon.addEventListener('click', function () {
-                // Toggle the class on the <i> element
-                modeIcon.querySelector('i').classList.toggle('fa-sun');
-                modeIcon.querySelector('i').classList.toggle('fa-moon');
-            });
-        });
-
+    <script src="../static/js/lightmode.js">
     </script>
 </body>
 
