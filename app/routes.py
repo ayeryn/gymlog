@@ -4,12 +4,13 @@ from app import app, db
 from app.models import GymClass, Attendance
 import os
 from io import TextIOWrapper
-from datetime import date, timedelta
-from calendar import HTMLCalendar
+from datetime import date
 import csv
 from re import search
 import requests
 import json
+from sqlalchemy import extract
+from collections import defaultdict
 
 
 def get_quote():
@@ -213,12 +214,17 @@ Reporting
 @app.route("/monthly_report")
 def monthly_report():
     # TODO: Upload some mock data for current month
-    # TODO: Query data for the report
-    # TODO: able to grab current month's datas
-    data = []
-    for i in range(10):
-        data.append((f'class_0{i}', i % 3 + 5))
 
-    labels = [row[0] for row in data]
-    values = [row[1] for row in data]
+    today = date.today()
+    attendances = Attendance.query \
+        .filter(extract('year', Attendance.date_attended) == today.year) \
+        .filter(extract('month', Attendance.date_attended) == today.month)
+
+    data = defaultdict(int)
+    for attendance in attendances:
+        data[attendance.class_taken.name] += 1
+
+    labels = [k for k in data.keys()]
+    values = [v for v in data.values()]
+
     return render_template('monthly_report.html', labels=labels, values=values)
