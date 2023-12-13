@@ -6,7 +6,7 @@
     --typewriter-chars: 17;
 }
 
-.light-theme {
+.light-mode {
     --primary-color: #fafafa;
     --secondary-color: black;
 }
@@ -53,6 +53,9 @@ header {
 
 #lightModeToggle {
     cursor: pointer;
+    border: none;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 
 #lightModeToggle:hover {

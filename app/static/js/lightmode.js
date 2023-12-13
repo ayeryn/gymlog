@@ -1,13 +1,36 @@
-document.addEventListener('DOMContentLoaded', function () {
-    var modeIcon = document.getElementById('modeIcon');
-    modeIcon.onclick = function () {
-        document.body.classList.toggle("light-theme")
-    };
+let lightMode = localStorage.getItem("lightMode");
+const lightModeToggle = document.querySelector("#lightModeToggle");
 
-    // Add a click event listener to the element
-    modeIcon.addEventListener('click', function () {
-        // Toggle the class on the <i> element
-        modeIcon.querySelector('i').classList.toggle('fa-sun');
-        modeIcon.querySelector('i').classList.toggle('fa-moon');
-    });
+const enableLightMode = () => {
+    // add light-mode to the body
+    document.body.classList.add("light-mode");
+
+    // update localStorage
+    localStorage.setItem("lightMode", "enabled");
+};
+
+const disableLightMode = () => {
+    // remove light-mode to the body
+    document.body.classList.remove("light-mode");
+
+    // update localStorage
+    localStorage.setItem("lightMode", null);
+};
+
+
+if (lightMode === "enabled") {
+    /* IMPORTANT!!!
+     * Make sure mode persists between page refreshes and redirects
+     */
+    enableLightMode();
+}
+
+lightModeToggle.addEventListener("click", () => {
+    //refresh lightMode var every time a click happens
+    lightMode = localStorage.getItem("lightMode");
+    if (lightMode !== "enabled") {
+        enableLightMode();
+    } else {
+        disableLightMode();
+    }
 });
