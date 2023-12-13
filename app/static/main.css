@@ -34,6 +34,10 @@ h4 {
     font-family: Outfit;
 }
 
+nav {
+    font-family: Outfit;
+}
+
 header {
     height: 5vh;
 }
@@ -47,6 +51,7 @@ main {
 
 .welcome {
     position: relative;
+    color: var(--accent-color);
     /* FIXME: cursor starting/end position incorrect
      width: max-content; */
 }
@@ -99,42 +104,24 @@ main {
     }
 }
 
-
-hr {
-    color: #006dd3;
-}
-
-.header-text:hover {
-    color: #3A1078;
-}
-
-.nav-text {
-    color: pink;
-}
-
-.site-link {
-    color: #00008B;
-}
-
-a.site-link:hover {
-    color: #FD841F;
-}
-
-
-.navbar-brand {
-    color: #3A1078;
-}
-
-.site-header .navbar-nav .nav-link {
-    color: #A8D1D1;
-}
-
-.site-header .navbar-nav .nav-link:hover {
-    color: #ffffff;
-}
-
 .site-header .navbar-nav .nav-link.active {
     font-weight: 500;
+}
+
+.brand {
+    color: var(--accent-color);
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: gray;
+}
+
+.nav-link:active {
+    color: var(--accent-color);
 }
 
 .content-section {
