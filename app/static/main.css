@@ -113,7 +113,7 @@ main {
 }
 
 .nav-link {
-    color: white;
+    color: var(--secondary-color);
 }
 
 .nav-link:hover {
@@ -184,8 +184,12 @@ a.article-title:hover {
     border-radius: 10px;
 }
 
+.card {
+    border-color: var(--secondary-color);
+}
+
 .card-subtitle {
-    color: white;
+    color: var(--secondary-color);
 }
 
 .btn-current {
@@ -199,7 +203,7 @@ a.article-title:hover {
 
 .btn-other:hover {
     border-color: var(--accent-color);
-    color: white;
+    color: var(--secondary-color);
 }
 
 .btn-add {
@@ -209,5 +213,5 @@ a.article-title:hover {
 }
 
 .btn-add:hover {
-    color: white;
+    color: var(--secondary-color);
 }
