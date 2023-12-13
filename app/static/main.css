@@ -157,10 +157,10 @@ main {
 }
 
 .content-section {
-    background: #ffffff;
-    padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
+    /* padding: 10px 20px; */
+    /* border: 1px solid #dddddd; */
+    /* border-radius: 3px; */
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
