@@ -6,6 +6,11 @@
     --typewriter-chars: 17;
 }
 
+.light-theme {
+    --primary-color: #fafafa;
+    --secondary-color: black;
+}
+
 @font-face {
     font-family: 'Roboto';
     src: url('fonts/Roboto-Regular.ttf');
@@ -44,6 +49,18 @@ nav {
 
 header {
     height: 5vh;
+}
+
+#modeIcon {
+    cursor: pointer;
+}
+
+#modeIcon:hover {
+    color: var(--accent-color);
+}
+
+.navbar a {
+    border-bottom: 2px solid var(--accent-color);
 }
 
 main {
@@ -119,6 +136,9 @@ main {
 
 .brand {
     color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    padding: 7px;
+    ;
 }
 
 .nav-link {
