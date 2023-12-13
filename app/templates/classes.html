@@ -16,8 +16,7 @@
                 <p class="card-subtitle mb-2">{{ c.class_type }}</p>
                 <p class="card-text">
                     Total Attendance: <strong>{{ c.attendance_list|length }} </strong></br>
-                    <!--FIXME: only grab date and not the whole repr -->
-                    Most recent attendance: <strong>{{ c.attendance_list|sort(reverse = True)|first }}</strong>
+                    Most recent attendance: {{ (c.attendance_list|sort(reverse = True)|first).date_attended }}
                 </p>
                 <a href="{{ url_for('edit_class', class_id=c.id) }}" class="btn btn-sm btn-current"><i
                         class="fa-solid fa-pen-to-square"></i></a>
