@@ -30,7 +30,7 @@ h1,
 h2,
 h3,
 h4 {
-    color: var(--secondary-color);
+    color: var(--accent-color);
     font-family: Outfit;
 }
 
@@ -51,7 +51,6 @@ main {
 
 .welcome {
     position: relative;
-    color: var(--accent-color);
     /* FIXME: cursor starting/end position incorrect
      width: max-content; */
 }
@@ -189,29 +188,36 @@ a.article-title:hover {
 }
 
 .card-subtitle {
-    color: var(--secondary-color);
+    text-decoration: underline;
 }
 
 .btn-current {
     background-color: var(--accent-color);
+    border-radius: 10%;
+}
+
+.btn-current:hover {
+    color: var(--secondary-color);
 }
 
 .btn-other {
     background-color: transparent;
-    color: var(--accent-color)
+    color: var(--secondary-color)
 }
 
 .btn-other:hover {
     border-color: var(--accent-color);
-    color: var(--secondary-color);
+    color: var(--accent-color);
 }
 
 .btn-add {
     background-color: transparent;
     border-color: var(--secondary-color);
-    color: var(--secondary-color)
+    color: var(--secondary-color);
+    border-radius: 10%;
 }
 
 .btn-add:hover {
-    color: var(--secondary-color);
+    color: var(--accent-color);
+    border-color: var(--accent-color);
 }
