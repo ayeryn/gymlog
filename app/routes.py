@@ -241,3 +241,11 @@ def yearly_report():
     values = [v for v in data.values()]
 
     return render_template('yearly_report.html', labels=labels, values=values)
+
+
+"""
+TODO:
+- add register
+- add profile pic page
+- add login, logout, and reset pw
+"""

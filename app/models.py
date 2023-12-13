@@ -31,3 +31,6 @@ class Attendance(db.Model):
     # Make object sortable by date
     def __lt__(self, other):
         return self.date_attended < other.date_attended
+
+
+# TODO: Add user
