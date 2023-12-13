@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for, request
-from app.forms import ClassForm, AttendanceForm
+from app.forms import ClassForm, AttendanceForm, RegistrationForm, LoginForm
 from app import app, db
 from app.models import GymClass, Attendance
 import os
@@ -249,3 +249,15 @@ TODO:
 - add profile pic page
 - add login, logout, and reset pw
 """
+
+
+@app.route("/register")
+def register():
+    form = RegistrationForm()
+    return render_template('register.html', title='Register', form=form)
+
+
+@app.route("/login")
+def login():
+    form = LoginForm()
+    return render_template('login.html', title='Login', form=form)
