@@ -34,6 +34,10 @@ h4 {
     font-family: Outfit;
 }
 
+h5 {
+    color: var(--primary-color);
+}
+
 nav {
     font-family: Outfit;
 }
@@ -44,9 +48,15 @@ header {
 
 main {
     display: grid;
-    place-content: center;
+    /* place-content: center; */
     text-align: center;
     height: 95vh;
+}
+
+#home {
+    display: grid;
+    place-content: center;
+    text-align: center;
 }
 
 .welcome {
@@ -131,6 +141,11 @@ main {
     margin-bottom: 20px;
 }
 
+.subtitle {
+    color: var(--secondary-color);
+    font-style: italic;
+}
+
 .article-title {
     color: #001E6C;
 }
@@ -178,17 +193,14 @@ a.article-title:hover {
     font-size: 2.5rem;
 }
 
-.content {
-    background-color: var(--tertiary-color);
-    border-radius: 10px;
-}
-
 .card {
     border-color: var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--primary-color);
 }
 
 .card-subtitle {
-    text-decoration: underline;
+    font-style: italic;
 }
 
 .btn-current {
