@@ -25,7 +25,8 @@ class Attendance(db.Model):
                               default=date.today)
 
     def __repr__(self) -> str:
-        return self.date_attended.strftime("%Y-%m-%d")
+        date_formatted = self.date_attended.strftime("%Y-%m-%d")
+        return f'Attendance({self.class_taken.name}, {date_formatted})'
 
     # Make object sortable by date
     def __lt__(self, other):
