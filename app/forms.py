@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DateField, SelectField
-from wtforms.validators import DataRequired, Length, ValidationError
-from app.models import GymClass
+from wtforms import StringField, SubmitField, DateField, SelectField, PasswordField, BooleanField
+from wtforms.validators import DataRequired, Length, ValidationError, Email, EqualTo
+from app.models import GymClass, Attendance
 
 
 class ClassForm(FlaskForm):
@@ -22,3 +22,20 @@ class AttendanceForm(FlaskForm):
                            DataRequired()], coerce=int)
     date_attended = DateField('Date', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[
+                           DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField(
+        'Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Sign Up')
+
+
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Sign In')
