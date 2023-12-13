@@ -6,11 +6,16 @@
     --typewriter-chars: 17;
 }
 
-/* TODO: use another font face */
 @font-face {
-    font-family: 'Fira Code';
-    src: url('fonts/FiraCode-Regular.woff2');
-    font-weight: bold;
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Regular.ttf');
+    font-weight: regular;
+}
+
+@font-face {
+    font-family: 'Outfit';
+    src: url('fonts/Outfit-Regular.ttf');
+    font-weight: regular;
 }
 
 body {
@@ -18,7 +23,7 @@ body {
     color: var(--secondary-color);
     margin: 0;
     min-height: 100vh;
-    font-family: 'Fira Code';
+    font-family: 'Roboto';
 }
 
 h1,
@@ -26,6 +31,7 @@ h2,
 h3,
 h4 {
     color: var(--secondary-color);
+    font-family: Outfit;
 }
 
 header {
@@ -114,9 +120,6 @@ a.site-link:hover {
     color: #FD841F;
 }
 
-.site-nav-bg {
-    background-color: var(--accent-color);
-}
 
 .navbar-brand {
     color: #3A1078;
