@@ -1,258 +1,250 @@
 :root {
-    --pink: #f9cdff;
-    --litepink: #fce6ff;
-    --bg-color: black;
-    --primary-color: #32CD32;
-    --secondary-color: #A1E8A1;
-    --tertiary-color: #5e5e5e;
-    /* --tertiary-color: #c1f0c1; */
-    --typewriter-speed: 2s;
-    --typewriter-chars: 17;
+  --primary-color: black;
+  --secondary-color: white;
+  --accent-color: #32cd32;
+  --typewriter-speed: 2s;
+  --typewriter-chars: 17;
 }
 
-/* TODO: use another font face */
+.light-mode {
+  --primary-color: #fafafa;
+  --secondary-color: black;
+}
+
 @font-face {
-    font-family: 'Fira Code';
-    src: url('fonts/FiraCode-Regular.woff2');
-    font-weight: bold;
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Regular.ttf");
+  font-weight: regular;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("fonts/Outfit-Regular.ttf");
+  font-weight: regular;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--primary-color);
-    margin: 0;
-    min-height: 100vh;
-    font-family: 'Fira Code';
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Roboto";
 }
 
 h1,
 h2,
 h3,
 h4 {
-    color: var(--primary-color);
+  color: var(--accent-color);
+  font-family: Outfit;
 }
 
+h5 {
+  color: var(--primary-color);
+}
 
-
+nav {
+  font-family: Outfit;
+}
 
 header {
-    height: 5vh;
+  height: 10vh;
 }
 
+#lightModeToggle {
+  cursor: pointer;
+  border: none;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+}
+
+#lightModeToggle:hover {
+  color: var(--accent-color);
+}
+
+#navbarSupportedContent {
+  border-bottom: 2px solid var(--accent-color);
+}
+
+/*  FIXME: what is going on with the icon?????
+.navbar-toggler-icon {
+  color: var(--secondary-color);
+} */
+
 main {
-    display: grid;
-    place-content: center;
-    text-align: center;
-    height: 95vh;
+  display: grid;
+}
+
+#home {
+  display: grid;
+  place-content: center;
+  text-align: center;
 }
 
 .welcome {
-    position: relative;
+  position: relative;
 }
 
 .welcome::before,
 .welcome::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 .welcome::before {
-    background-color: var(--bg-color);
-    animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards;
+  background-color: var(--primary-color);
+  animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars))
+    1s forwards;
 }
 
 .welcome::after {
-    width: 0.125em;
-    background-color: var(--primary-color);
-    animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards
+  width: 0.125em;
+  background-color: var(--secondary-color);
+  animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars))
+      1s forwards,
+    blink 750ms steps(var(--typewriter-chars)) infinite;
 }
 
 @keyframes typewriter {
-    to {
-        left: 100%;
-    }
+  to {
+    left: 100%;
+  }
 }
 
 @keyframes blink {
-    to {
-        background-color: transparent;
-    }
+  to {
+    background-color: transparent;
+  }
 }
 
 .quote {
-    opacity: 0;
-    transform: translateY(3rem);
-    animation: fadeInUp 2s ease calc(var(--typewriter-speed) + 2s) forwards;
+  opacity: 0;
+  transform: translateY(3rem);
+  animation: fadeInUp 2s ease calc(var(--typewriter-speed) + 2s) forwards;
 }
 
 @keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-hr {
-    color: #006dd3;
-}
-
-.header-text:hover {
-    color: #3A1078;
-}
-
-.nav-text {
-    color: pink;
-}
-
-.site-link {
-    color: #00008B;
-}
-
-a.site-link:hover {
-    color: #FD841F;
-}
-
-.site-nav-bg {
-    background-color: var(--secondary-color);
-}
-
-.navbar-brand {
-    color: #3A1078;
-}
-
-.site-header .navbar-nav .nav-link {
-    color: var(--lime);
-}
-
-.site-header .navbar-nav .nav-link:hover {
-    color: black;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .site-header .navbar-nav .nav-link.active {
-    font-weight: 500;
+  font-weight: 500;
 }
 
-.content-section {
-    background: #ffffff;
-    padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    margin-bottom: 20px;
+.brand {
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  padding: 7px;
+}
+
+.nav-link {
+  color: var(--secondary-color);
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.nav-link:active {
+  color: var(--accent-color);
+}
+
+.subtitle {
+  color: var(--secondary-color);
+  font-style: italic;
 }
 
 .article-title {
-    color: #001E6C;
+  color: #001e6c;
 }
 
 a.article-title:hover {
-    color: #428bca;
-    text-decoration: none;
+  color: #428bca;
+  text-decoration: none;
 }
 
 .article-content {
-    white-space: pre-line;
+  white-space: pre-line;
 }
 
 .article-img {
-    height: 65px;
-    width: 65px;
-    margin-right: 16px;
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
 }
 
 .article-metadata {
-    padding-bottom: 1px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3;
 }
 
 .article-metadata a:hover {
-    color: #333;
-    text-decoration: none;
+  color: #333;
+  text-decoration: none;
 }
 
 .article-svg {
-    width: 25px;
-    height: 25px;
-    vertical-align: middle;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
 }
 
 .account-img {
-    height: 125px;
-    width: 125px;
-    margin-right: 20px;
-    margin-bottom: 16px;
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
 }
 
 .account-heading {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
-.content {
-    background-color: var(--tertiary-color);
-    border-radius: 10px;
+.card {
+  border-color: var(--secondary-color);
+  border-radius: 10px;
+  background-color: var(--primary-color);
 }
 
 .card-subtitle {
-    color: white;
+  font-style: italic;
 }
 
 .btn-current {
-    background-color: var(--secondary-color);
+  background-color: var(--accent-color);
+  border-radius: 10%;
+}
+
+.btn-current:hover {
+  color: var(--secondary-color);
 }
 
 .btn-other {
-    background-color: transparent;
-    color: var(--secondary-color)
+  background-color: transparent;
+  color: var(--secondary-color);
 }
 
 .btn-other:hover {
-    border-color: var(--secondary-color);
-    color: white;
+  border-color: var(--accent-color);
+  color: var(--accent-color);
 }
 
 .btn-add {
-    background-color: transparent;
-    border-color: var(--primary-color);
-    color: var(--primary-color)
+  background-color: transparent;
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+  border-radius: 10%;
 }
 
 .btn-add:hover {
-    color: white;
-}
-
-.btn-update {
-    background-color: var(--pink)
-}
-
-.btn-view {
-    background-color: var(--litelime)
-}
-
-.welcome-text {
-    /* border: 5px solid #F1C0B9; */
-    background-color: var(--pink)
-}
-
-.content-section {
-    background: var(--litepink);
-    padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    margin-bottom: 20px;
-}
-
-.account-img {
-    height: 125px;
-    width: 125px;
-    margin-right: 20px;
-    margin-bottom: 16px;
-}
-
-.account-heading {
-    font-size: 2.5rem;
+  color: var(--accent-color);
+  border-color: var(--accent-color);
 }

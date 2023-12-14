@@ -17,8 +17,8 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db, render_as_batch=True)
 bcrypt = Bcrypt(app)
 login = LoginManager(app)
-login.login_view = 'login'
-login.login_message_category = 'info'
+login.login_view = "login"
+login.login_message_category = "info"
 # print(app.config['MAIL_USERNAME'])
 # print(app.config['MAIL_PASSWORD'])
 
@@ -28,18 +28,20 @@ from app import routes, models
 
 # Only send logs to email when the app is running without debug mode
 if not app.debug:
-    if app.config['MAIL_SERVER']:
+    if app.config["MAIL_SERVER"]:
         auth = None
-        if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
-            auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
+        if app.config["MAIL_USERNAME"] or app.config["MAIL_PASSWORD"]:
+            auth = (app.config["MAIL_USERNAME"], app.config["MAIL_PASSWORD"])
         secure = None
-        if app.config['MAIL_USE_TLS']:
+        if app.config["MAIL_USE_TLS"]:
             secure = ()
         mail_handler = SMTPHandler(
-            mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
-            fromaddr='no-reply@' + app.config['MAIL_SERVER'],
-            toaddrs=app.config['ADMINS'], subject='Gymlog Failure',
-            credentials=auth, secure=secure
+            mailhost=(app.config["MAIL_SERVER"], app.config["MAIL_PORT"]),
+            fromaddr="no-reply@" + app.config["MAIL_SERVER"],
+            toaddrs=app.config["ADMINS"],
+            subject="Gymlog Failure",
+            credentials=auth,
+            secure=secure,
         )
 
         # Only report errors
