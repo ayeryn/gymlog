@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block content %}
-<div class="row align-items-center">
-  <h1>
+<div class="text-center mt-2">
+  <h1 class="display-4">
     {{ gymclass.name }}
     <a
       href="{{ url_for('classes.update_class', class_id=gymclass.id) }}"
@@ -14,6 +14,10 @@
       data-bs-target="#deleteModal">
       <i class="fa-solid fa-trash-can"></i>
     </button>
+  </h1>
+    <h4 class="subtitle">{{ gymclass.class_type }}</h4>
+</div>
+<div class="row align-items-center">
     <div
       class="modal fade"
       id="deleteModal"
@@ -45,7 +49,7 @@
       </div>
     </div>
   </h1>
-  <h4 class="subtitle">{{ gymclass.class_type }}</h4>
+
   <h4>
     Attendance History
     <a
