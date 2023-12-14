@@ -1,8 +1,8 @@
 {% extends "layout.html" %} {% block content %}
-<div class="row justify-content-center">
-  <h1>Monthly Report</h1>
+<div class="text-center mt-2 mb-5">
+  <h1 class="display-4">Monthly Report</h1>
 </div>
-<canvas id="lineChart" width="700" height="400"></canvas>
+s<canvas id="lineChart" width="700" height="400"></canvas>
 <script>
   var ctx = document.getElementById("lineChart").getContext("2d");
   var myChart = new Chart(ctx, {
