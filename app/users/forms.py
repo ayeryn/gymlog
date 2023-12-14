@@ -1,32 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import (
-    StringField,
-    SubmitField,
-    DateField,
-    SelectField,
-    PasswordField,
-    BooleanField,
-)
+from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, ValidationError, Email, EqualTo
-from app.models import GymClass, Attendance, User
-
-
-class ClassForm(FlaskForm):
-    name = StringField("Name", validators=[DataRequired(), Length(min=3, max=20)])
-    class_type = StringField("Type")
-    submit = SubmitField("Submit")
-
-    def validate_name(self, name):
-        c = GymClass.query.filter_by(name=name.data).first()
-
-        if c:
-            raise ValidationError("Class exists!")
-
-
-class AttendanceForm(FlaskForm):
-    class_id = SelectField("Class", validate_choice=[DataRequired()], coerce=int)
-    date_attended = DateField("Date", validators=[DataRequired()])
-    submit = SubmitField("Submit")
+from app.models import User
 
 
 class RegistrationForm(FlaskForm):

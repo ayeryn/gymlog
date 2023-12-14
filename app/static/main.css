@@ -148,8 +148,8 @@ main {
   color: var(--secondary-color);
 }
 
-.nav-link:hover {
-  color: gray;
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
 }
 
 .nav-link:active {
@@ -247,4 +247,8 @@ a.article-title:hover {
 .btn-add:hover {
   color: var(--accent-color);
   border-color: var(--accent-color);
+}
+
+#deleteModalLabel {
+  color: black;
 }
