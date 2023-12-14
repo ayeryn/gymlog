@@ -7,8 +7,6 @@ from app.classes.utils import capitalize_str
 
 classes = Blueprint("classes", __name__)
 
-# TODO: recover class.html and add_class.html
-
 
 @classes.route("/classes")
 def show_classes():
