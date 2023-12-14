@@ -8,6 +8,24 @@ from app.models import Attendance
 reports = Blueprint("reports", __name__)
 
 
+@reports.route("/weekly_report")
+def weekly_report():
+    # FIXME: write actual code for grabbing weekly data
+    today = date.today()
+    attendances = Attendance.query.filter(
+        extract("year", Attendance.date_attended) == today.year
+    ).filter(extract("month", Attendance.date_attended) == today.month)
+
+    data = defaultdict(int)
+    for attendance in attendances:
+        data[attendance.class_taken.name] += 1
+
+    labels = [k for k in data.keys()]
+    values = [v for v in data.values()]
+
+    return render_template("weekly_report.html", labels=labels, values=values)
+
+
 @reports.route("/monthly_report")
 def monthly_report():
     today = date.today()

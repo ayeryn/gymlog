@@ -83,7 +83,11 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <a class="dropdown-item" href="#">Weekly</a>
+                    <a
+                      class="dropdown-item"
+                      href="{{ url_for('reports.weekly_report') }}"
+                      >Weekly</a
+                    >
                   </li>
                   <li>
                     <a
