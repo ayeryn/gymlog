@@ -1,14 +1,14 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 <div class="content-section">
-    <div class="media">
-        <img class="rounded-circle account-img" src="{{ image_file }}">
-        <div class="media-body">
-            <h2 class="account-heading">{{ current_user.username }}</h2>
-            <p class="text-secondary">{{ current_user.email }}</p>
-        </div>
+  <div class="media">
+    <!-- <img class="rounded-circle account-img" src="{{ image_file }}" /> -->
+    <div class="media-body">
+      <h2 class="account-heading">{{ current_user.username }}</h2>
+      <p class="text-secondary">{{ current_user.email }}</p>
     </div>
-    <form method="POST" action="" enctype="multipart/form-data">
+  </div>
+  <!--TODO: Finish Account Page implementation-->
+  <!-- <form method="POST" action="" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <fieldset class="form_group">
             <legend class="border-bottom mb-4">Account Info</legend>
@@ -51,6 +51,6 @@
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}
         </div>
-    </form>
+    </form> -->
 </div>
 {% endblock content %}
