@@ -248,3 +248,7 @@ a.article-title:hover {
   color: var(--accent-color);
   border-color: var(--accent-color);
 }
+
+#deleteModalLabel {
+  color: black;
+}

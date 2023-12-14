@@ -6,7 +6,6 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
 # from flask_mail import Mail
-
 # import logging
 # from logging.handlers import SMTPHandler
 
@@ -19,12 +18,24 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db, compare_type=True)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-login_manager.login_view = "login"
+login_manager.login_view = "users.login"
 login_manager.login_message_category = "info"
 
 # mail = Mail(app)
 
-from app import routes
+from app.attendances.routes import attendances
+from app.classes.routes import classes
+from app.main.routes import main
+from app.reports.routes import reports
+from app.upload.routes import upload
+from app.users.routes import users
+
+app.register_blueprint(attendances)
+app.register_blueprint(classes)
+app.register_blueprint(main)
+app.register_blueprint(reports)
+app.register_blueprint(upload)
+app.register_blueprint(users)
 
 # from app import routes, models
 

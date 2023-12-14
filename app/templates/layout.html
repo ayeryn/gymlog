@@ -29,7 +29,9 @@
     <header>
       <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-          <a class="navbar-brand brand" href="{{ url_for('home') }}">GymLog</a>
+          <a class="navbar-brand brand" href="{{ url_for('main.home') }}"
+            >GymLog</a
+          >
           <button
             class="navbar-toggler"
             type="button"
@@ -46,22 +48,26 @@
                 <a
                   class="nav-link"
                   aria-current="page"
-                  href="{{ url_for('home') }}"
+                  href="{{ url_for('main.home') }}"
                   >Home</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link nav-text" href="{{ url_for('classes') }}"
+                <a
+                  class="nav-link nav-text"
+                  href="{{ url_for('classes.show_classes') }}"
                   >Classes</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('attendances') }}"
+                <a
+                  class="nav-link"
+                  href="{{ url_for('attendances.show_attendances') }}"
                   >Attendances</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('upload_csv') }}"
+                <a class="nav-link" href="{{ url_for('upload.upload_csv') }}"
                   >Upload</a
                 >
               </li>
@@ -82,14 +88,14 @@
                   <li>
                     <a
                       class="dropdown-item"
-                      href="{{ url_for('monthly_report') }}"
+                      href="{{ url_for('reports.monthly_report') }}"
                       >Monthly</a
                     >
                   </li>
                   <li>
                     <a
                       class="dropdown-item"
-                      href="{{ url_for('yearly_report') }}"
+                      href="{{ url_for('reports.yearly_report') }}"
                       >Yearly</a
                     >
                   </li>
@@ -99,19 +105,25 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               {% if current_user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+                <a class="nav-link" href="{{ url_for('users.account') }}"
+                  >Account</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                <a class="nav-link" href="{{ url_for('users.logout') }}"
+                  >Logout</a
+                >
               </li>
               {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('register') }}"
+                <a class="nav-link" href="{{ url_for('users.register') }}"
                   >Register</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                <a class="nav-link" href="{{ url_for('users.login') }}"
+                  >Login</a
+                >
               </li>
               {% endif %}
             </ul>
