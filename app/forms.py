@@ -8,7 +8,7 @@ from wtforms import (
     BooleanField,
 )
 from wtforms.validators import DataRequired, Length, ValidationError, Email, EqualTo
-from app.models import GymClass, Attendance
+from app.models import GymClass, Attendance, User
 
 
 class ClassForm(FlaskForm):
@@ -39,6 +39,16 @@ class RegistrationForm(FlaskForm):
         "Confirm Password", validators=[DataRequired(), EqualTo("password")]
     )
     submit = SubmitField("Register")
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError("Username exists. Please try again.")
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError("Email exists. Please try again.")
 
 
 class LoginForm(FlaskForm):
