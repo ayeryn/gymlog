@@ -1,0 +1,36 @@
+{% extends "layout.html" %} {% block content %}
+<div class="container-fluid">
+  <form method="POST" action="">
+    {{ form.csrf_token }}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-b">{{ legend }}</legend>
+      <div class="form-group">
+        {{ form.name.label(class="form-control-label") }} {% if form.name.errors
+        %} {{ form.name(class="form-control from-crontrol-lg is-invalid") }}
+        <div class="invalid-feeback">
+          {% for error in form.name.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.name(class="form-control from-crontrol-lg") }} {%
+        endif %}
+      </div>
+      <div class="form-group">
+        {{ form.class_type.label(class="form-control-label") }} {% if
+        form.class_type.errors %} {{ form.class_type(class="form-control
+        from-crontrol-lg is-invalid") }}
+        <div class="invalid-feeback">
+          {% for error in form.class_type.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.class_type(class="form-control from-crontrol-lg") }}
+        {% endif %}
+      </div>
+    </fieldset>
+    <div class="form-group">
+      {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+  </form>
+</div>
+{% endblock content %}

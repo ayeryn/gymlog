@@ -41,7 +41,7 @@ def show_class(class_id):
 
 
 @classes.route("/class/<int:class_id>/update", methods=["GET", "POST"])
-def edit_class(class_id):
+def update_class(class_id):
     gymclass = GymClass.query.get(class_id)
     form = ClassForm()
 
