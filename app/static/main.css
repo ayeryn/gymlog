@@ -220,7 +220,7 @@ a.article-title:hover {
 
 .btn-current {
   background-color: var(--accent-color);
-  border-radius: 10%;
+  border-radius: 10% 10%;
 }
 
 .btn-current:hover {
@@ -246,6 +246,16 @@ a.article-title:hover {
 .btn-add:hover {
   color: var(--accent-color);
   border-color: var(--accent-color);
+}
+
+.btn-bordered {
+  background-color: transparent;
+  border-color: var(--accent-color);
+  color: var(--secondary-color);
+}
+
+.btn-bordered:hover {
+  color: var(--accent-color);
 }
 
 #deleteModalLabel {

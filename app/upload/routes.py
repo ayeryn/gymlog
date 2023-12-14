@@ -39,4 +39,4 @@ def upload_csv():
 
         return redirect(url_for("classes.show_classes"))
 
-    return render_template("upload.html", title="Upload CSV")
+    return render_template("upload_csv.html", title="Upload CSV")

@@ -1,18 +1,70 @@
 {% extends "layout.html" %} {% block content %}
-<div class="container-fluid">
-  <article class="media content-section mt-4">
-    <h2 class="article-title">Upload CSV</h2>
-    <div class="row">
-      <form
-        action="/upload"
-        method="POST"
-        enctype="multipart/form-data"
-        class="form-group">
-        <label for="file"> File: </label>
-        <input type="file" id="file" name="file" />
-        <button class="btn btn-primary">Upload</button>
-      </form>
-    </div>
-  </article>
+<div class="text-center mt-2 mb-5">
+  <h1 class="display-4">Upload CSV</h1>
+</div>
+<div class="row">
+  <p>
+    <button
+      class="btn btn-bordered mr-5"
+      data-bs-toggle="collapse"
+      href="#csv-about"
+      role="button"
+      aria-expanded="false"
+      aria-controls="csv-about">
+      About
+    </button>
+    <button
+      class="btn btn-bordered"
+      role="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#csv-rules"
+      aria-expanded="false"
+      aria-controls="csv-rules">
+      CSV requirements
+    </button>
+    <button
+      class="btn btn-bordered"
+      data-bs-toggle="collapse"
+      href="#csv-template"
+      role="button"
+      aria-expanded="false"
+      aria-controls="csv-template">
+      CSV Template
+    </button>
+  </p>
+</div>
+<div class="collapse" id="csv-about">
+  <div class="card card-body">
+    GymLog allows you to bulk add classes via CSV files. Please make sure the
+    file satisfy the following
+  </div>
+</div>
+<div class="collapse" id="csv-rules">
+  <div class="card card-body">
+    <ul>
+      <li>File must be of type .csv</li>
+      <li>
+        File must have headers:
+        <span class="code">class_name, attendance_date(YYYYmmdd)</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="collapse" id="csv-template">
+  <div class="card card-body">
+    <p>Download the template file for convenience!</p>
+    <button>Download template</button>
+  </div>
+</div>
+<div class="row mt-5 justify-content-center">
+  <form
+    action="/upload"
+    method="POST"
+    enctype="multipart/form-data"
+    class="form-group">
+    <label for="file"> File: </label>
+    <input type="file" id="file" name="file" />
+    <button class="btn btn-current">Upload</button>
+  </form>
 </div>
 {% endblock content %}
