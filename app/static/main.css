@@ -62,7 +62,7 @@ header {
   color: var(--accent-color);
 }
 
-.navbar a {
+#navbarSupportedContent {
   border-bottom: 2px solid var(--accent-color);
 }
 
