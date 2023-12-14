@@ -252,7 +252,7 @@ def yearly_report():
 """
 TODO:
 - add profile pic page
-- add logout, and reset pw
+- reset pw
 """
 
 
@@ -283,11 +283,12 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            return redirect(url_for("home"))
+            next_page = request.args.get("next")
+            if next_page:
+                return redirect(next_page)
+            return redirect(url_for("classes"))
         else:
-            xflash(
-                f"Something went wrong :( Please check email and password.", "danger"
-            )
+            flash(f"Something went wrong :( Please check email and password.", "danger")
     return render_template("login.html", title="Login", form=form)
 
 
