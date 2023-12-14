@@ -1,258 +1,258 @@
 :root {
-    --primary-color: black;
-    --secondary-color: white;
-    --accent-color: #32cd32;
-    --typewriter-speed: 2s;
-    --typewriter-chars: 17;
+  --primary-color: black;
+  --secondary-color: white;
+  --accent-color: #32cd32;
+  --typewriter-speed: 2s;
+  --typewriter-chars: 17;
 }
 
 .light-mode {
-    --primary-color: #fafafa;
-    --secondary-color: black;
+  --primary-color: #fafafa;
+  --secondary-color: black;
 }
 
 @font-face {
-    font-family: 'Roboto';
-    src: url('fonts/Roboto-Regular.ttf');
-    font-weight: regular;
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Regular.ttf");
+  font-weight: regular;
 }
 
 @font-face {
-    font-family: 'Outfit';
-    src: url('fonts/Outfit-Regular.ttf');
-    font-weight: regular;
+  font-family: "Outfit";
+  src: url("fonts/Outfit-Regular.ttf");
+  font-weight: regular;
 }
 
 body {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    margin: 0;
-    min-height: 100vh;
-    font-family: 'Roboto';
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Roboto";
 }
 
 h1,
 h2,
 h3,
 h4 {
-    color: var(--accent-color);
-    font-family: Outfit;
+  color: var(--accent-color);
+  font-family: Outfit;
 }
 
 h5 {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 nav {
-    font-family: Outfit;
+  font-family: Outfit;
 }
 
 header {
-    height: 5vh;
+  height: 5vh;
 }
 
 #lightModeToggle {
-    cursor: pointer;
-    border: none;
-    color: var(--secondary-color);
-    background-color: var(--primary-color);
+  cursor: pointer;
+  border: none;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
 #lightModeToggle:hover {
-    color: var(--accent-color);
+  color: var(--accent-color);
 }
 
 .navbar a {
-    border-bottom: 2px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
 }
 
 main {
-    display: grid;
-    /* place-content: center; */
-    text-align: center;
-    height: 95vh;
+  display: grid;
+  /* place-content: center; */
+  text-align: center;
+  height: 95vh;
 }
 
 #home {
-    display: grid;
-    place-content: center;
-    text-align: center;
+  display: grid;
+  place-content: center;
+  text-align: center;
 }
 
 .welcome {
-    position: relative;
-    /* FIXME: cursor starting/end position incorrect
+  position: relative;
+  /* FIXME: cursor starting/end position incorrect
      width: max-content; */
 }
 
 .welcome::before,
 .welcome::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 .welcome::before {
-    background-color: var(--primary-color);
-    animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards;
+  background-color: var(--primary-color);
+  animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars))
+    1s forwards;
 }
 
 .welcome::after {
-    width: 0.125em;
-    background-color: var(--secondary-color);
-    animation:
-        typewriter var(--typewriter-speed) steps(var(--typewriter-chars)) 1s forwards,
-        blink 750ms steps(var(--typewriter-chars)) infinite;
+  width: 0.125em;
+  background-color: var(--secondary-color);
+  animation: typewriter var(--typewriter-speed) steps(var(--typewriter-chars))
+      1s forwards,
+    blink 750ms steps(var(--typewriter-chars)) infinite;
 }
 
 @keyframes typewriter {
-    to {
-        left: 100%;
-    }
+  to {
+    left: 100%;
+  }
 }
 
 @keyframes blink {
-    to {
-        background-color: transparent;
-    }
+  to {
+    background-color: transparent;
+  }
 }
 
 .quote {
-    opacity: 0;
-    transform: translateY(3rem);
-    animation: fadeInUp 2s ease calc(var(--typewriter-speed) + 2s) forwards;
+  opacity: 0;
+  transform: translateY(3rem);
+  animation: fadeInUp 2s ease calc(var(--typewriter-speed) + 2s) forwards;
 }
 
 @keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .site-header .navbar-nav .nav-link.active {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .brand {
-    color: var(--accent-color);
-    border: 2px solid var(--accent-color);
-    padding: 7px;
-    ;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  padding: 7px;
 }
 
 .nav-link {
-    color: var(--secondary-color);
+  color: var(--secondary-color);
 }
 
 .nav-link:hover {
-    color: gray;
+  color: gray;
 }
 
 .nav-link:active {
-    color: var(--accent-color);
+  color: var(--accent-color);
 }
 
 .content-section {
-    /* padding: 10px 20px; */
-    /* border: 1px solid #dddddd; */
-    /* border-radius: 3px; */
-    margin-top: 20px;
-    margin-bottom: 20px;
+  /* padding: 10px 20px; */
+  /* border: 1px solid #dddddd; */
+  /* border-radius: 3px; */
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .subtitle {
-    color: var(--secondary-color);
-    font-style: italic;
+  color: var(--secondary-color);
+  font-style: italic;
 }
 
 .article-title {
-    color: #001E6C;
+  color: #001e6c;
 }
 
 a.article-title:hover {
-    color: #428bca;
-    text-decoration: none;
+  color: #428bca;
+  text-decoration: none;
 }
 
 .article-content {
-    white-space: pre-line;
+  white-space: pre-line;
 }
 
 .article-img {
-    height: 65px;
-    width: 65px;
-    margin-right: 16px;
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
 }
 
 .article-metadata {
-    padding-bottom: 1px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3;
 }
 
 .article-metadata a:hover {
-    color: #333;
-    text-decoration: none;
+  color: #333;
+  text-decoration: none;
 }
 
 .article-svg {
-    width: 25px;
-    height: 25px;
-    vertical-align: middle;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
 }
 
 .account-img {
-    height: 125px;
-    width: 125px;
-    margin-right: 20px;
-    margin-bottom: 16px;
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
 }
 
 .account-heading {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 .card {
-    border-color: var(--secondary-color);
-    border-radius: 10px;
-    background-color: var(--primary-color);
+  border-color: var(--secondary-color);
+  border-radius: 10px;
+  background-color: var(--primary-color);
 }
 
 .card-subtitle {
-    font-style: italic;
+  font-style: italic;
 }
 
 .btn-current {
-    background-color: var(--accent-color);
-    border-radius: 10%;
+  background-color: var(--accent-color);
+  border-radius: 10%;
 }
 
 .btn-current:hover {
-    color: var(--secondary-color);
+  color: var(--secondary-color);
 }
 
 .btn-other {
-    background-color: transparent;
-    color: var(--secondary-color)
+  background-color: transparent;
+  color: var(--secondary-color);
 }
 
 .btn-other:hover {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
 }
 
 .btn-add {
-    background-color: transparent;
-    border-color: var(--secondary-color);
-    color: var(--secondary-color);
-    border-radius: 10%;
+  background-color: transparent;
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+  border-radius: 10%;
 }
 
 .btn-add:hover {
-    color: var(--accent-color);
-    border-color: var(--accent-color);
+  color: var(--accent-color);
+  border-color: var(--accent-color);
 }
