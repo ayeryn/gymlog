@@ -48,7 +48,7 @@ nav {
 }
 
 header {
-  height: 5vh;
+  height: 10vh;
 }
 
 #lightModeToggle {
@@ -66,11 +66,14 @@ header {
   border-bottom: 2px solid var(--accent-color);
 }
 
+/*  FIXME: what is going on with the icon?????
+.navbar-toggler-icon {
+  color: var(--secondary-color);
+} */
+
 main {
   display: grid;
-  /* place-content: center; */
-  text-align: center;
-  height: 95vh;
+  height: 90vh;
 }
 
 #home {
@@ -81,8 +84,6 @@ main {
 
 .welcome {
   position: relative;
-  /* FIXME: cursor starting/end position incorrect
-     width: max-content; */
 }
 
 .welcome::before,
@@ -154,14 +155,6 @@ main {
 
 .nav-link:active {
   color: var(--accent-color);
-}
-
-.content-section {
-  /* padding: 10px 20px; */
-  /* border: 1px solid #dddddd; */
-  /* border-radius: 3px; */
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .subtitle {

@@ -105,15 +105,15 @@
               <li>
                 <a class="nav-link" ref="{{ url_for('login') }}">Login</a>
               </li>
-              <button id="lightModeToggle">
-                <i class="fa-solid fa-circle-half-stroke"></i>
-              </button>
             </ul>
           </div>
+          <button id="lightModeToggle">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+          </button>
         </div>
       </nav>
     </header>
-    <main role="main" class="container-fluid">
+    <main role="main" class="container">
       <div class="row">
         {% with messages = get_flashed_messages(with_categories=true) %} {% if
         messages %} {% for category, message in messages %}
