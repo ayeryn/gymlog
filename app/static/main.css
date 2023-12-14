@@ -46,6 +46,9 @@ h5 {
 nav {
   font-family: Outfit;
 }
+nav a:hover {
+  color: var(--accent-color);
+}
 
 header {
   height: 10vh;
@@ -134,10 +137,6 @@ main {
   }
 }
 
-.site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
-}
-
 .brand {
   color: var(--accent-color);
   border: 2px solid var(--accent-color);
@@ -148,53 +147,13 @@ main {
   color: var(--secondary-color);
 }
 
-.site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
-}
-
-.nav-link:active {
+.nav-link:hover {
   color: var(--accent-color);
 }
 
 .subtitle {
   color: var(--secondary-color);
   font-style: italic;
-}
-
-.article-title {
-  color: #001e6c;
-}
-
-a.article-title:hover {
-  color: #428bca;
-  text-decoration: none;
-}
-
-.article-content {
-  white-space: pre-line;
-}
-
-.article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
-}
-
-.article-metadata {
-  padding-bottom: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3;
-}
-
-.article-metadata a:hover {
-  color: #333;
-  text-decoration: none;
-}
-
-.article-svg {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
 }
 
 .account-img {
