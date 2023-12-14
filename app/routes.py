@@ -6,7 +6,6 @@ import os
 from io import TextIOWrapper
 from datetime import date
 import csv
-from re import search
 import requests
 import json
 from sqlalchemy import extract
@@ -245,19 +244,21 @@ def yearly_report():
 
 """
 TODO:
-- add register
 - add profile pic page
-- add login, logout, and reset pw
+- add logout, and reset pw
 """
 
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f"Account created for {form.username.data}!", "success")
+        return redirect(url_for("home"))
     return render_template('register.html', title='Register', form=form)
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
     return render_template('login.html', title='Login', form=form)
