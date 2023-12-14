@@ -7,9 +7,6 @@ from app.classes.utils import capitalize_str
 
 classes = Blueprint("classes", __name__)
 
-# TODO: rename variable c to gymclass
-# TODO: recover class.html and add_class.html
-
 
 @classes.route("/classes")
 def show_classes():
@@ -23,11 +20,11 @@ def new_class():
     form = ClassForm()
 
     if form.validate_on_submit():
-        c = GymClass(
+        gymclass = GymClass(
             name=capitalize_str(form.name.data),
             class_type=capitalize_str(form.class_type.data),
         )
-        db.session.add(c)
+        db.session.add(gymclass)
         db.session.commit()
         flash("New class added!", "success")
         return redirect(url_for("classes.show_classes", title="Classes"))
@@ -37,24 +34,24 @@ def new_class():
 
 @classes.route("/class/<int:class_id>")
 def show_class(class_id):
-    c = GymClass.query.get(class_id)
-    return render_template("class.html", legend=c.name, gymclass=c)
+    gymclass = GymClass.query.get(class_id)
+    return render_template("class.html", legend=gymclass.name, gymclass=gymclass)
 
 
 @classes.route("/class/<int:class_id>/update", methods=["GET", "POST"])
-def edit_class(class_id):
-    c = GymClass.query.get(class_id)
+def update_class(class_id):
+    gymclass = GymClass.query.get(class_id)
     form = ClassForm()
 
-    if c and form.validate_on_submit():
-        c.name = capitalize_str(form.name.data)
-        db.session.add(c)
+    if gymclass and form.validate_on_submit():
+        gymclass.name = capitalize_str(form.name.data)
+        db.session.add(gymclass)
         db.session.commit()
         flash("Class updated!", "success")
 
     elif request.method == "GET":
-        form.name.data = c.name
-        form.class_type.data = c.class_type
+        form.name.data = gymclass.name
+        form.class_type.data = gymclass.class_type
         return render_template("add_class.html", legend="Update class", form=form)
 
     return redirect(url_for("classes.show_classes"))
@@ -62,10 +59,10 @@ def edit_class(class_id):
 
 @classes.route("/class/<int:class_id>/delete", methods=["POST"])
 def delete_class(class_id):
-    c = GymClass.query.get(class_id)
-    class_name = c.name
+    gymclass = GymClass.query.get(class_id)
+    class_name = gymclass.name
 
-    db.session.delete(c)
+    db.session.delete(gymclass)
     db.session.commit()
     flash(f"{class_name} has been deleted!", "success")
 

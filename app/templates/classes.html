@@ -1,47 +1,62 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 <div class="text-center mt-2">
-    <h1 class="display-4">Classes <a href="{{ url_for('classes.new_class') }}" class="btn btn-sm btn-add"><i class="fa-solid fa-plus"></i></a></h1>
+  <h1 class="display-4">
+    Classes
+    <a href="{{ url_for('classes.new_class') }}" class="btn btn-sm btn-add"
+      ><i class="fa-solid fa-plus"></i
+    ></a>
+  </h1>
 </div>
 <div class="row row-cols-1 row-cols-md-3">
-    {% for c in gym_classes|sort %}
-    <div class="col mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">
-                    {{ c.name }}
-                </h4>
-                <p class="card-subtitle mb-2">{{ c.class_type }}</p>
-                <p class="card-text">
-                    Total Attendance: <strong>{{ c.attendance_list|length }} </strong></br>
-                    Most recent attendance: {{ (c.attendance_list|sort(reverse = True)|first).date_attended }}
-                </p>
-                <a href="{{ url_for('classes.edit_class', class_id=c.id) }}" class="btn btn-sm btn-current"><i
-                        class="fa-solid fa-pen-to-square"></i></a>
-                <a href="{{ url_for('classes.show_class', class_id=c.id) }}" class="btn btn-sm btn-current"><i
-                        class="fa-solid fa-circle-info"></i></a>
-            </div>
-        </div>
+  {% for class in gym_classes|sort %}
+  <div class="col mb-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{ class.name }}</h4>
+        <p class="card-subtitle mb-2">{{ class.class_type }}</p>
+        <p class="card-text">
+          Total Attendance: <strong>{{ class.attendance_list|length }} </strong
+          ><br />
+          {% if class.attendance_list|length > 0 %} Most recent attendance: {{
+          (class.attendance_list|sort(reverse = True)|first).date_attended }} {%
+          endif %}
+        </p>
+        <a
+          href="{{ url_for('classes.update_class', class_id=class.id) }}"
+          class="btn btn-sm btn-current"
+          ><i class="fa-solid fa-pen-to-square"></i
+        ></a>
+        <a
+          href="{{ url_for('classes.show_class', class_id=class.id) }}"
+          class="btn btn-sm btn-current"
+          ><i class="fa-solid fa-circle-info"></i
+        ></a>
+      </div>
     </div>
-    {% endfor %}
+  </div>
+  {% endfor %}
 </div>
 <nav>
-    <ul class="pagination justify-content-center">
-        {% for page_num in gym_classes.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-        {% if page_num %}
-        {% if gym_classes.page == page_num %}
-        <li class="page-item">
-            <a class="btn btn-current mb-4" href="{{ url_for('classes.show_classes', page=page_num) }}">{{ page_num }}</a>
-        </li>
-        {% else %}
-        <li class="page-item">
-            <a class="btn btn-other mb-4" href="{{ url_for('classes.show_classes', page=page_num) }}">{{ page_num }}</a>
-        </li>
-        {% endif %}
-        {% else %}
-        ...
-        {% endif %}
-        {% endfor %}
-    </ul>
+  <ul class="pagination justify-content-center">
+    {% for page_num in gym_classes.iter_pages(left_edge=1, right_edge=1,
+    left_current=1, right_current=2) %} {% if page_num %} {% if gym_classes.page
+    == page_num %}
+    <li class="page-item">
+      <a
+        class="btn btn-current mb-4"
+        href="{{ url_for('classes.show_classes', page=page_num) }}"
+        >{{ page_num }}</a
+      >
+    </li>
+    {% else %}
+    <li class="page-item">
+      <a
+        class="btn btn-other mb-4"
+        href="{{ url_for('classes.show_classes', page=page_num) }}"
+        >{{ page_num }}</a
+      >
+    </li>
+    {% endif %} {% else %} ... {% endif %} {% endfor %}
+  </ul>
 </nav>
 {% endblock content %}
