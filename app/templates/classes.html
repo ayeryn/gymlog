@@ -17,8 +17,9 @@
         <p class="card-text">
           Total Attendance: <strong>{{ class.attendance_list|length }} </strong
           ><br />
-          Most recent attendance: {{ (class.attendance_list|sort(reverse =
-          True)|first).date_attended }}
+          {% if class.attendance_list|length > 0 %} Most recent attendance: {{
+          (class.attendance_list|sort(reverse = True)|first).date_attended }} {%
+          endif %}
         </p>
         <a
           href="{{ url_for('classes.update_class', class_id=class.id) }}"
