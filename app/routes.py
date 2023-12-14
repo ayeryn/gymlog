@@ -10,7 +10,7 @@ import requests
 import json
 from sqlalchemy import extract
 from collections import defaultdict
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
 
 
 def get_quote():
@@ -295,3 +295,9 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("home"))
+
+
+@app.route("/account")
+@login_required
+def account():
+    return render_template("account.html", title="My Account")
