@@ -41,7 +41,7 @@ def classes():
 
 def capitalize_str(s):
     # Helper Function
-    return ' '.join([x.capitalize() for x in s.split()])
+    return " ".join([x.capitalize() for x in s.split()])
 
 
 @app.route("/new_class", methods=["GET", "POST"])
@@ -98,9 +98,9 @@ def delete_class(class_id):
     return redirect(url_for("classes"))
 
 
-'''
+"""
 Attendance related endpoints
-
+"""
 
 
 @app.route("/attendances")
@@ -161,7 +161,8 @@ def delete_attendance(attendance_id):
 
     return redirect(url_for("attendances"))
 
-'''
+
+"""
 CSV loader
 """
 ALLOWED_EXTENTIONS = set([".csv"])
@@ -192,10 +193,10 @@ def upload_csv():
             for row in csv_reader:
                 class_name, date = process_csv_row(row, f_name)
 
-                # Add Activity if class doesn't exists
-                c = Activity.query.filter_by(name=class_name).first()
+                # Add GymClass if class doesn't exists
+                c = GymClass.query.filter_by(name=class_name).first()
                 if not c:
-                    c = Activity(name=class_name)
+                    c = GymClass(name=class_name)
                     db.session.add(c)
                     db.session.commit()
                     flash(f"Class {class_name} created from csv", "success")

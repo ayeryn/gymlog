@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
         return f"User({self.username}, {self.email}, {self.avatar_file})"
 
 
-class GymClass(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
     class_type = db.Column(db.String(3), default="Workout")
