@@ -10,6 +10,7 @@ import requests
 import json
 from sqlalchemy import extract
 from collections import defaultdict
+from flask_login import login_user, current_user
 
 
 def get_quote():
@@ -257,6 +258,9 @@ TODO:
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for("classes"))
+
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
@@ -276,9 +280,12 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == "a@test.com":
-            flash(f"You have been logged in!", "success")
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
             return redirect(url_for("home"))
         else:
-            flash(f"Something went wrong :( Please check email and password.", "danger")
+            xflash(
+                f"Something went wrong :( Please check email and password.", "danger"
+            )
     return render_template("login.html", title="Login", form=form)
