@@ -40,7 +40,8 @@ def classes():
 
 
 def capitalize_str(s):
-    return " ".join([x.capitalize() for x in s.split()])
+    # Helper Function
+    return ' '.join([x.capitalize() for x in s.split()])
 
 
 @app.route("/new_class", methods=["GET", "POST"])
@@ -71,10 +72,9 @@ def edit_class(class_id):
     c = GymClass.query.get(class_id)
     form = ClassForm()
 
-    if c and form.validate_on_submit():
-        c.name = capitalize_str(form.name.data)
-        c.class_type = form.class_type.data
-        db.session.add(c)
+    if act and form.validate_on_submit():
+        act.name = capitalize_str(form.name.data)
+        db.session.add(act)
         db.session.commit()
         flash("Class updated!", "success")
 
@@ -91,16 +91,16 @@ def delete_class(class_id):
     c = GymClass.query.get(class_id)
     class_name = c.name
 
-    db.session.delete(c)
+    db.session.delete(act)
     db.session.commit()
     flash(f"{class_name} has been deleted!", "success")
 
     return redirect(url_for("classes"))
 
 
-"""
+'''
 Attendance related endpoints
-"""
+
 
 
 @app.route("/attendances")
@@ -161,8 +161,7 @@ def delete_attendance(attendance_id):
 
     return redirect(url_for("attendances"))
 
-
-"""
+'''
 CSV loader
 """
 ALLOWED_EXTENTIONS = set([".csv"])
@@ -193,10 +192,10 @@ def upload_csv():
             for row in csv_reader:
                 class_name, date = process_csv_row(row, f_name)
 
-                # Add GymClass if class doesn't exists
-                c = GymClass.query.filter_by(name=class_name).first()
+                # Add Activity if class doesn't exists
+                c = Activity.query.filter_by(name=class_name).first()
                 if not c:
-                    c = GymClass(name=class_name)
+                    c = Activity(name=class_name)
                     db.session.add(c)
                     db.session.commit()
                     flash(f"Class {class_name} created from csv", "success")

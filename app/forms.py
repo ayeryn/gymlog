@@ -17,7 +17,7 @@ class ClassForm(FlaskForm):
     submit = SubmitField("Submit")
 
     def validate_name(self, name):
-        c = GymClass.query.filter_by(name=name.data).first()
+        a = Activity.query.filter_by(name=name.data).first()
 
         if c:
             raise ValidationError("Class exists!")
