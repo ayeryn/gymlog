@@ -239,9 +239,8 @@ a.article-title:hover {
 
 .btn-add {
   background-color: transparent;
-  border-color: var(--secondary-color);
   color: var(--secondary-color);
-  border-radius: 10%;
+  border-radius: 50%;
 }
 
 .btn-add:hover {
