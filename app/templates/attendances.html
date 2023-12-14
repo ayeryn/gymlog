@@ -1,7 +1,6 @@
 {% extends "layout.html" %} {% block content %}
-<!--FIXME: Fix content dimensions-->
-<div class="row align-items-center">
-  <h1>
+<div class="text-center mt-2">
+  <h1 class="display-4">
     Attendances
     <a
       href="{{ url_for('attendances.new_attendance') }}"
@@ -10,60 +9,58 @@
     ></a>
   </h1>
 </div>
-<div class="content">
+<div class="row text-center">
   {% for a in attendance_list %}
-  <div class="row">
-    <div class="col-2">
-      <p>{{ a.date_attended.strftime('%Y-%m-%d') }}</p>
-    </div>
-    <div class="col-8">
-      <p>
-        <a
-          class="site-link"
-          href="{{ url_for('classes.show_class', class_id=a.class_id) }}"
-          >{{ a.class_taken.name }}</a
-        >
-      </p>
-    </div>
-    <div class="col-2">
-      <button
-        type="button"
-        class="btn btn-danger btn-sm m-1"
-        data-bs-toggle="modal"
-        data-bs-target="#deleteModal">
-        <i class="fa-solid fa-trash"></i>
-      </button>
-      <div
-        class="modal fade"
-        id="deleteModal"
-        tabindex="-1"
-        aria-labelledby="deleteModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="deleteModalLabel">
-                Delete Attendance?
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-sm" data-bs-dismiss="modal">
-                Close
-              </button>
-              <form
-                action="{{ url_for('attendances.delete_attendance', attendance_id=a.id) }}"
-                method="POST">
-                <input
-                  type="submit"
-                  class="btn btn-sm btn-danger"
-                  value="Delete" />
-              </form>
-            </div>
+  <div class="col-2">
+    <p>{{ a.date_attended.strftime('%Y-%m-%d') }}</p>
+  </div>
+  <div class="col-8">
+    <p>
+      <a
+        class="class-link"
+        href="{{ url_for('classes.show_class', class_id=a.class_id) }}"
+        >{{ a.class_taken.name }}</a
+      >
+    </p>
+  </div>
+  <div class="col-2">
+    <button
+      type="button"
+      class="btn btn-other btn-sm m-1"
+      data-bs-toggle="modal"
+      data-bs-target="#deleteModal">
+      <i class="fa-solid fa-trash"></i>
+    </button>
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">
+              Delete Attendance?
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm" data-bs-dismiss="modal">
+              Close
+            </button>
+            <form
+              action="{{ url_for('attendances.delete_attendance', attendance_id=a.id) }}"
+              method="POST">
+              <input
+                type="submit"
+                class="btn btn-sm btn-danger"
+                value="Delete" />
+            </form>
           </div>
         </div>
       </div>

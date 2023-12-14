@@ -252,3 +252,7 @@ a.article-title:hover {
 #deleteModalLabel {
   color: black;
 }
+
+.class-link {
+  color: var(--secondary-color);
+}
