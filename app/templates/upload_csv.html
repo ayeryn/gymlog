@@ -2,6 +2,7 @@
 <div class="text-center mt-2 mb-5">
   <h1 class="display-4">Upload CSV</h1>
 </div>
+<!--Collapsable Tabs-->
 <div class="row">
   <p>
     <button
@@ -42,10 +43,9 @@
 <div class="collapse" id="csv-rules">
   <div class="card card-body">
     <ul>
-      <li>File must be of type .csv</li>
+      <li>File Type: .csv</li>
       <li>
-        File must have headers:
-        <span class="code">class_name, attendance_date(YYYYmmdd)</span>
+        Headers:class_name, attendance_date<i>(format: yyyy-mm-dd)</i></span>
       </li>
     </ul>
   </div>
@@ -56,7 +56,19 @@
     <button>Download template</button>
   </div>
 </div>
-<div class="row mt-5 justify-content-center">
+<!--Upload Form-->
+<div class="mb-3 mt-5">
+  <form
+    action="/upload"
+    method="POST"
+    enctype="multipart/form-data"
+    class="form-group">
+    <label for="file"> </label>
+    <input class="form-control" type="file" id="file" name="file" />
+    <button class="btn btn-current mt-5">Upload</button>
+  </form>
+</div>
+<!-- <div class="row mt-5 justify-content-center">
   <form
     action="/upload"
     method="POST"
@@ -66,5 +78,5 @@
     <input type="file" id="file" name="file" />
     <button class="btn btn-current">Upload</button>
   </form>
-</div>
+</div> -->
 {% endblock content %}

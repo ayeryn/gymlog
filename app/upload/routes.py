@@ -24,7 +24,7 @@ def upload_csv():
             csv_reader = csv.reader(file, delimiter=",")
             for row in csv_reader:
                 class_name = capitalize_str(row[0])
-                date_attended = date.fromisoformat(row[1])
+                date_attended = date.fromisoformat(row[1].strip())
 
                 # Add GymClass if class doesn't exists
                 c = GymClass.query.filter_by(name=class_name).first()
@@ -39,6 +39,6 @@ def upload_csv():
                 db.session.commit()
                 flash(f"New attendance create for {class_name}", "success")
 
-        return redirect(url_for("classes.show_classes"))
+        return redirect(url_for("attendances.show_attendances"))
 
     return render_template("upload_csv.html", title="Upload CSV")
