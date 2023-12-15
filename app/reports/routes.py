@@ -10,11 +10,10 @@ reports = Blueprint("reports", __name__)
 
 @reports.route("/weekly_report")
 def weekly_report():
-    # FIXME: write actual code for grabbing weekly data
     today = date.today()
     attendances = Attendance.query.filter(
         extract("year", Attendance.date_attended) == today.year
-    ).filter(extract("month", Attendance.date_attended) == today.month)
+    ).filter(extract("week", Attendance.date_attended) == today.isocalendar()[1])
 
     data = defaultdict(int)
     for attendance in attendances:
