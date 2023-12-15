@@ -15,45 +15,44 @@
       <i class="fa-solid fa-trash-can"></i>
     </button>
   </h1>
-    <h4 class="subtitle">{{ gymclass.class_type }}</h4>
+  <h4 class="subtitle">{{ gymclass.class_type }}</h4>
 </div>
 <div class="row align-items-center">
-    <div
-      class="modal fade"
-      id="deleteModal"
-      tabindex="-1"
-      aria-labelledby="deleteModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel">
-              Delete <strong>{{ gymclass.name }}</strong> and all associated
-              attendances?
-            </h5>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal">
-              Close
-            </button>
-            <form
-              action="{{ url_for('classes.delete_class', class_id=gymclass.id) }}"
-              method="POST">
-              <input type="submit" class="btn btn-danger" value="Delete" />
-            </form>
-          </div>
+  <div
+    class="modal fade"
+    id="deleteModal"
+    tabindex="-1"
+    aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">
+            Delete <strong>{{ gymclass.name }}</strong> and all associated
+            attendances?
+          </h5>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal">
+            Close
+          </button>
+          <form
+            action="{{ url_for('classes.delete_class', class_id=gymclass.id) }}"
+            method="POST">
+            <input type="submit" class="btn btn-danger" value="Delete" />
+          </form>
         </div>
       </div>
     </div>
-  </h1>
+  </div>
 
   <h4>
     Attendance History
     <a
-      href="{{ url_for('attendances.new_attendance') }}"
+      href="{{ url_for('attendances.new_attendance', class_id=gymclass.id) }}"
       class="btn btn-sm btn-add"
       ><i class="fa-solid fa-plus"></i
     ></a>

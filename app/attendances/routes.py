@@ -23,6 +23,10 @@ def new_attendance():
     form = AttendanceForm()
     form.class_id.choices = [(c.id, c.name) for c in GymClass.query.all()]
 
+    class_id = request.args.get("class_id")
+    if class_id:
+        form.class_id.data = int(class_id)
+
     if form.validate_on_submit():
         a = Attendance(
             class_id=form.class_id.data, date_attended=form.date_attended.data
