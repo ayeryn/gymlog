@@ -59,7 +59,7 @@
     ></a>
   </h4>
   <ul class="list-group list-group-flush">
-    {% for a in gymclass.attendance_list|sort %}
+    {% for a in gymclass.attendance_list|sort(reverse=true) %}
     <li class="list-group-item list-group-item-dark">
       {{ a.date_attended.strftime('%Y-%m-%d') }}
     </li>
