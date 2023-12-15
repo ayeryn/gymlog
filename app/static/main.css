@@ -69,10 +69,14 @@ header {
   border-bottom: 2px solid var(--accent-color);
 }
 
-/*  FIXME: what is going on with the icon?????
-.navbar-toggler-icon {
+.btn-toggler {
   color: var(--secondary-color);
-} */
+  border: 2px solid var(--secondary-color);
+}
+
+.toggler-icon {
+  color: var(--secondary-color);
+}
 
 main {
   display: grid;
