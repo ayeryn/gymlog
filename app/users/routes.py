@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
-from app.users.forms import RegistrationForm, LoginForm
+from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from app import db, bcrypt
 from app.models import User
 
@@ -9,7 +9,6 @@ users = Blueprint("users", __name__)
 
 """
 TODO:
-- add profile pic page
 - reset pw
 """
 
@@ -56,7 +55,22 @@ def logout():
     return redirect(url_for("main.home"))
 
 
-@users.route("/account")
+@users.route("/account", methods=["GET", "POST"])
 @login_required
 def account():
-    return render_template("account.html", title="My Account")
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash(f"Your account has been updated!", "success")
+        return redirect(url_for("users.account"))
+
+    elif request.method == "GET":
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+
+    profile_pic = url_for("static", filename="profile_pics/" + current_user.avatar_file)
+    return render_template(
+        "account.html", title="My Account", profile_pic=profile_pic, form=form
+    )
