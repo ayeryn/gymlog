@@ -1,7 +1,7 @@
 {% extends "layout.html" %} {% block content %}
 <div class="row justify-content-center align-items-center mt-2">
   <div class="col-auto">
-    <img class="profile-pic rounded-circle" src="{{ profile_pic }}" />
+    <img class="profile-pic rounded-circle border" src="{{ profile_pic }}" />
   </div>
   <div class="col-auto">
     <h1 class="display-6">{{ current_user.username }}</h1>
@@ -10,7 +10,7 @@
 </div>
 <div class="row justify-content-center">
   <div class="col-6">
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data">
       {{ form.hidden_tag() }}
       <fieldset class="mb-3">
         <div class="mb-3">
@@ -35,6 +35,13 @@
           </div>
           {% else %} {{ form.email(class="form-control form-control-lg") }} {%
           endif %}
+        </div>
+        <div class="mb3">
+          {{ form.picture.label(class="form-label") }} {{
+          form.picture(class="form-control-file") }} {% if form.picture.errors
+          %} {% for error in form.picture.errors %}
+          <br /><span class="text-danger">{{ error }}</span>
+          {% endfor %} {% endif %}
         </div>
       </fieldset>
       <div class="mb-3 mt-5">{{ form.submit(class="btn btn-current") }}</div>

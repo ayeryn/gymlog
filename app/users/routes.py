@@ -3,6 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from app import db, bcrypt
 from app.models import User
+from app.users.utils import save_picture_data
 
 
 users = Blueprint("users", __name__)
@@ -60,6 +61,9 @@ def logout():
 def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
+        if form.picture.data:
+            filename = save_picture_data(form.picture.data)
+            current_user.avatar_file = filename
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
