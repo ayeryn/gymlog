@@ -1,11 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Grab labels and values
-  var labels = ["label 1"];
-  var values = [1, 2, 3];
-  // FIXME: not entirely sure if we can separate chart.js from html because of the flask variables
-  //   var labels = {{ labels|tojson|safe }};
-  //   var values = {{ values|tojson|safe }};
-
   var ctx = document.getElementById("weeklyReport").getContext("2d");
   var chartData = {
     labels: labels,

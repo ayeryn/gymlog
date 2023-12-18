@@ -4,4 +4,8 @@
 </div>
 <canvas id="weeklyReport" width="700" height="400"></canvas>
 <script src="{{url_for('static', filename='/js/weeklyReport.js') }}"></script>
+<script type="text/javascript">
+  labels = {{ labels|tojson|safe }};
+  values = {{ values|tojson|safe }};
+</script>
 {% endblock content %}
