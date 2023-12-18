@@ -21,3 +21,11 @@ def save_picture_data(form_picture):
     i.save(filepath)
 
     return filename
+
+
+def remove_old_pic(filename):
+    filename = os.path.join(app.root_path, "static/profile_pics", filename)
+    try:
+        os.remove(filename)
+    except Exception as e:
+        print(f"An error occurred: {e}!")

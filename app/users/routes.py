@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from app import db, bcrypt
 from app.models import User
-from app.users.utils import save_picture_data
+from app.users.utils import save_picture_data, remove_old_pic
 
 
 users = Blueprint("users", __name__)
@@ -63,7 +63,12 @@ def account():
     if form.validate_on_submit():
         if form.picture.data:
             filename = save_picture_data(form.picture.data)
+            old_profile_pic = current_user.avatar_file
             current_user.avatar_file = filename
+
+            # clean up old profile pic file
+            remove_old_pic(old_profile_pic)
+
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
