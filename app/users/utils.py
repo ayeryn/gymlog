@@ -29,3 +29,7 @@ def remove_old_pic(filename):
         os.remove(filename)
     except Exception as e:
         print(f"An error occurred: {e}!")
+
+
+def send_password_reset_email(user):
+    pass

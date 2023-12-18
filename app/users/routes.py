@@ -1,9 +1,14 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
-from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from app.users.forms import (
+    RegistrationForm,
+    LoginForm,
+    UpdateAccountForm,
+    ResetPasswordRequestForm,
+)
 from app import db, bcrypt
 from app.models import User
-from app.users.utils import save_picture_data, remove_old_pic
+from app.users.utils import save_picture_data, remove_old_pic, send_password_reset_email
 
 
 users = Blueprint("users", __name__)
@@ -82,4 +87,22 @@ def account():
     profile_pic = url_for("static", filename="profile_pics/" + current_user.avatar_file)
     return render_template(
         "account.html", title="My Account", profile_pic=profile_pic, form=form
+    )
+
+
+@users.route("/reset_password_request", methods=["GET", "POST"])
+def reset_password_request():
+    form = ResetPasswordRequestForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_password_reset_email(user)
+            flash(f"Check your email for instructions!", "success")
+            return redirect(url_for("users.login"))
+        else:
+            flash(f"Account doesn't exist! Please try again.", "danger")
+
+    return render_template(
+        "reset_password_request.html", title="Reset Password", form=form
     )

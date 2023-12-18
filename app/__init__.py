@@ -4,8 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from flask_mail import Mail
 
-# from flask_mail import Mail
 # import logging
 # from logging.handlers import SMTPHandler
 
@@ -20,8 +20,7 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "users.login"
 login_manager.login_message_category = "info"
-
-# mail = Mail(app)
+mail = Mail(app)
 
 from app.attendances.routes import attendances
 from app.classes.routes import classes
