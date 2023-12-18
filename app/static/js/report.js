@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         label: "Attendances",
         data: values,
         backgroundColor: ["rgba(50, 205, 50, 0.5)"],
-        borderColor: ["rgba(255, 255, 255, 1)"],
+        borderColor: ["rgba(50, 205, 50, 1)"],
         borderWidth: 1,
       },
     ],
@@ -15,13 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var chartOptions = {
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
+      y: {
+        beginAtZero: true,
+        ticks: {
+          stepSize: 1,
         },
-      ],
+      },
     },
   };
 
