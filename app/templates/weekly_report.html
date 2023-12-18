@@ -3,9 +3,10 @@
   <h1 class="display-4">Weekly Report</h1>
 </div>
 <canvas id="weeklyReport" width="700" height="400"></canvas>
-<script src="{{url_for('static', filename='/js/weeklyReport.js') }}"></script>
+<script src="{{url_for('static', filename='/js/report.js') }}"></script>
 <script type="text/javascript">
   labels = {{ labels|tojson|safe }};
   values = {{ values|tojson|safe }};
+  reportId = "weeklyReport";
 </script>
 {% endblock content %}

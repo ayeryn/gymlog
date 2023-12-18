@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var ctx = document.getElementById("weeklyReport").getContext("2d");
+  var ctx = document.getElementById(reportId).getContext("2d");
   var chartData = {
     labels: labels,
     datasets: [
