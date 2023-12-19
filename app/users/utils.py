@@ -33,8 +33,9 @@ def remove_old_pic(filename):
         print(f"An error occurred: {e}!")
 
 
-def send_email(subject, recipients, text_body, html_body, sender="noreply@gymlog.me"):
-    msg = Message(subject, sender, recipients=recipients)
+def send_email(subject, recipients, text_body, html_body):
+    system_sender = ("GYMLOG Team", "noreply@gymlog.me")
+    msg = Message(subject, sender=system_sender, recipients=recipients)
     msg.body = text_body
     msg.html = html_body
     mail.send(msg)
