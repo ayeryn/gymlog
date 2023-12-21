@@ -5,26 +5,36 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 
-app = Flask(__name__)
-app.config.from_object(Config)
 
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
-login_manager = LoginManager(app)
+db = SQLAlchemy()
+bcrypt = Bcrypt()
+login_manager = LoginManager()
 login_manager.login_view = "users.login"
 login_manager.login_message_category = "info"
-mail = Mail(app)
+mail = Mail()
 
-from app.attendances.routes import attendances
-from app.classes.routes import classes
-from app.main.routes import main
-from app.reports.routes import reports
-from app.upload.routes import upload
-from app.users.routes import users
 
-app.register_blueprint(attendances)
-app.register_blueprint(classes)
-app.register_blueprint(main)
-app.register_blueprint(reports)
-app.register_blueprint(upload)
-app.register_blueprint(users)
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    mail.init_app(app)
+
+    from app.attendances.routes import attendances
+    from app.classes.routes import classes
+    from app.main.routes import main
+    from app.reports.routes import reports
+    from app.upload.routes import upload
+    from app.users.routes import users
+
+    app.register_blueprint(attendances)
+    app.register_blueprint(classes)
+    app.register_blueprint(main)
+    app.register_blueprint(reports)
+    app.register_blueprint(upload)
+    app.register_blueprint(users)
+
+    return app

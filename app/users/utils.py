@@ -2,8 +2,8 @@ import secrets
 import os
 from PIL import Image
 from flask_mail import Message
-from flask import render_template
-from app import app, mail
+from flask import current_app, render_template
+from app import mail
 
 
 def save_picture_data(form_picture):
@@ -13,7 +13,7 @@ def save_picture_data(form_picture):
     filename = random_hex + f_ext
 
     # generate absolute path for profile pic
-    filepath = os.path.join(app.root_path, "static/profile_pics", filename)
+    filepath = os.path.join(current_app.root_path, "static/profile_pics", filename)
 
     # resize pic to icon size before saving
     output_size = (125, 125)
@@ -30,7 +30,7 @@ def remove_old_pic(filename):
     if filename == "default.png":
         return
 
-    filename = os.path.join(app.root_path, "static/profile_pics", filename)
+    filename = os.path.join(current_app.root_path, "static/profile_pics", filename)
     try:
         os.remove(filename)
     except Exception as e:
