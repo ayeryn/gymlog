@@ -5,6 +5,7 @@ from app.users.forms import (
     LoginForm,
     UpdateAccountForm,
     ResetPasswordRequestForm,
+    ResetPasswordForm,
 )
 from app import db, bcrypt
 from app.models import User
@@ -12,11 +13,6 @@ from app.users.utils import save_picture_data, remove_old_pic, send_password_res
 
 
 users = Blueprint("users", __name__)
-
-"""
-TODO:
-- reset pw
-"""
 
 
 @users.route("/register", methods=["GET", "POST"])
@@ -35,7 +31,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f"Your account has been created! Let's get you started :) ", "success")
-        return redirect(url_for("classes.login"))
+        return redirect(url_for("users.login"))
     return render_template("register.html", title="Register", form=form)
 
 
@@ -106,3 +102,24 @@ def reset_password_request():
     return render_template(
         "reset_password_request.html", title="Reset Password", form=form
     )
+
+
+@users.route("/reset_password/<token>", methods=["GET", "POST"])
+def reset_password(token):
+    user = User.verify_reset_password_token(token)
+
+    if not user:
+        flash(f"Token invalid! Please try again", "warning")
+        return redirect(url_for("users.reset_password_request"))
+
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
+            "utf-8"
+        )
+        user.password = hashed_password
+        db.session.commit()
+        flash(f"Your password is updated!", "success")
+        return redirect(url_for("users.login"))
+
+    return render_template("reset_password.html", title="Reset Password", form=form)
