@@ -14,11 +14,11 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    avatar_file = db.Column(db.String(20), nullable=False, default="default.jpg")
+    avatar_file = db.Column(db.String(20), nullable=False, default="default.png")
     password = db.Column(db.String(60), nullable=False)
 
     def __repr__(self):
-        return f"User({self.username}, {self.email}, {self.avatar_file})"
+        return f"User({self.username}, {self.email})"
 
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(
