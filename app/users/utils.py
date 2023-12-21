@@ -26,6 +26,10 @@ def save_picture_data(form_picture):
 
 
 def remove_old_pic(filename):
+    # never remove the default profile pic
+    if filename == "default.png":
+        return
+
     filename = os.path.join(app.root_path, "static/profile_pics", filename)
     try:
         os.remove(filename)
