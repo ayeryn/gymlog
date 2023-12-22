@@ -29,6 +29,7 @@ def create_app(config_class=Config):
     from app.reports.routes import reports
     from app.upload.routes import upload
     from app.users.routes import users
+    from app.errors.handlers import errors
 
     app.register_blueprint(attendances)
     app.register_blueprint(classes)
@@ -36,5 +37,6 @@ def create_app(config_class=Config):
     app.register_blueprint(reports)
     app.register_blueprint(upload)
     app.register_blueprint(users)
+    app.register_blueprint(errors)
 
     return app
