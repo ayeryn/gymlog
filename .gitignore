@@ -26,4 +26,4 @@ htmlcov/
 test.py
 
 # Let's not keep track of site.db lol
-site.db
+*/site.db
